@@ -1,9 +1,16 @@
 <div align="center" style="display: flex;"><img width="800" style="border-radius: 10px;" src="https://user-images.githubusercontent.com/101672047/193461817-38d518b5-8398-4c23-ba72-601643855179.gif"></div>
+
 <br>
 <div align="center">
   <strong>Snip.io</strong> - is free and open source snippet manager, that written on Tauri.
   <br>
   (Rust framework, analogue of Electron, that provides JavaScript API).
+</div>
+<br/>
+<div align="center" style="display: flex;">
+  <img src="https://img.shields.io/badge/Backend-Rust-714955?style=flat&logo=Rust&logoColor=red" alt="Backend" />
+  <img src="https://img.shields.io/badge/Frontend-Vue-439D8E?style=flat&logo=Vue.js&logoColor=green" alt="Frontend" />
+  <img src="https://img.shields.io/badge/Desktop%20Framework-Tauri-C8963E?style=flat&logo=Tauri&logoColor=yellow" alt="Desktop Framework" />
 </div>
 
 # Features
