@@ -1,4 +1,6 @@
-<div align="center" style="display: flex;"><img width="800" style="border-radius: 10px;" src="https://user-images.githubusercontent.com/101672047/193461817-38d518b5-8398-4c23-ba72-601643855179.gif"></div>
+<div align="center" style="display: flex;">
+<img width="800" style="border-radius: 10px;" src="https://user-images.githubusercontent.com/101672047/193468366-1ff38eda-54b2-4025-97c4-93a67953bd10.gif">
+</div>
 
 <br>
 <div align="center">
