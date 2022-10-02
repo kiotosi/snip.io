@@ -16,6 +16,7 @@
 </div>
 
 # Features
+
 - Free. Forever.
 - Open Source
 - All snippets are stored in JSON file (in future maybe use YAML syntax)
@@ -24,20 +25,24 @@
 - Provides support of many languages (see table in the bottom of the README)
 
 # Why?
+
 Because there is no free snippet manager with normal UI 💁‍♂️
 
 My design isn't clear too, because I'm not a UI Designer, but I have minimal experience in developing of UI, so I've decided to make something cool, fast and useful :)
 
 # Roadmap
+
 > **Info**
 >
 > Currently I'm developing on my own, so I don't have anything like Jira or Asana, because it's not required. You can see links under this info messages.
 > My log is currently placed in Notion, but I also have a Trello board, it's on English.
 
-* [Notion](https://crackidocky.notion.site/snip-io-4f2fd2bf6c2745fb8b742e3ee25d9fef)
+- [Notion](https://crackidocky.notion.site/snip-io-4f2fd2bf6c2745fb8b742e3ee25d9fef)
+
 # Supported languages
 
 ### C-Family
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -62,6 +67,7 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 ### Terminal
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -82,6 +88,7 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 ### Popular
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -126,6 +133,7 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 ### Web
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -174,6 +182,7 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 ### Markup
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -194,6 +203,7 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 ### Other
+
 <table style="width: 100%;">
   <thead>
     <tr>
@@ -242,10 +252,11 @@ My design isn't clear too, because I'm not a UI Designer, but I have minimal exp
 </table>
 
 > **Stack**
-> 
+>
 > If you have decided to make a contribution, you'll may to know these technologies: Vue 3, Rust, Tauri, Pinia, Vue Router, Prism.js, JSON/YAML
 
 # Additional links
+
 - [Tauri docs](https://tauri.app/v1/api/js/)
 - [Rust docs](https://doc.rust-lang.org/std/)
 - [Pinia docs](https://pinia.vuejs.org/introduction.html)
