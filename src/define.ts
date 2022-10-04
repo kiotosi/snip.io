@@ -1,4 +1,4 @@
-import { SnippetLanguage } from './components/Snippet/snippet.types';
+import { SnippetLanguage } from './typescript/types/snippetsStore';
 
 export const LANGUAGES_SELECTOR_LIST: Partial<Record<SnippetLanguage, string>> =
   {
@@ -39,3 +39,17 @@ export const LANGUAGES_SELECTOR_LIST: Partial<Record<SnippetLanguage, string>> =
     vim: 'Vim',
     yaml: 'YAML',
   };
+
+export const IMMUTABLE_DIRECTORIES_LIST = ['All Snippets'];
+
+export const LOCAL_STORAGE_ITEMS = {
+  current_directory: 'pager_current_directory',
+  current_snippet: 'pager_current_snippet',
+};
+
+export const INVOKE_METHODS = {
+  snippets: {
+    save: 'save_snippets',
+    load: 'get_snippets',
+  },
+};

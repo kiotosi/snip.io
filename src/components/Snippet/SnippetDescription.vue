@@ -1,0 +1,35 @@
+<template>
+  <textarea :value="snippetDescription" placeholder="Type description to your snippet" name="description" class="snippet-description"></textarea>
+</template>
+
+<script lang="ts" setup>
+  defineProps({
+    snippetDescription: {
+      type: String,
+      required: true
+    }
+  })
+</script>
+
+<style scoped lang="less">
+.snippet-description {
+  margin-top: 2rem;
+  display: block;
+  width: 100%;
+  min-height: 100px;
+  max-height: 200px;
+  padding: 12px 10px;
+  resize: vertical;
+  color: @gray;
+
+  &::placeholder {
+    color: fadeout(@gray-alt, 40%);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .default-border();
+
+}
+</style>
