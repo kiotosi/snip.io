@@ -33,6 +33,7 @@
   }
 
   &__text {
+    .no-selection();
     user-select: none;
     pointer-events: none;
     margin-bottom: 0;

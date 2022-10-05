@@ -1,11 +1,26 @@
 <template>
-  <div ref="leftmenuFolderReference" class="leftmenu-folder">
+  <div v-if="directoryList.length" class="leftmenu-folder">
     <TransitionGroup name="folder">
-      <DirectoryItem v-for="item in directoryList" :key="item.id" v-bind="item"
-        :is-active="item.id === activeDirectoryID" />
-      <LeftmenuAdd :key="'adder'" class="leftmenu-folder__adder" @click="addFolder" />
+      <DirectoryItem
+        v-for="item in directoryList"
+        :key="item.id"
+        v-bind="item"
+        :is-active="item.id === activeDirectoryID"
+      />
+      <LeftmenuAdd
+        :key="'adder'"
+        class="leftmenu-folder__adder"
+        @click="addFolder"
+      />
     </TransitionGroup>
   </div>
+  <LeftmenuPlaceholder
+    v-else
+    :clickable="true"
+    icon-name="plus-circle"
+    text="To create directory click on plus sign 🙂"
+    @create="addFolder"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -15,6 +30,7 @@ import useSnippetsStore from '../../../store/snippets.store';
 import usePagerStore from '../../../store/pager.store';
 import LeftmenuAdd from '../LeftmenuAdd/LeftmenuAdd.vue';
 import { createDirectoryMock } from '../../../typescript/creator';
+import LeftmenuPlaceholder from '../LeftmenuPlaceholder/LeftmenuPlaceholder.vue';
 
 // Stores
 const snippetsStore = useSnippetsStore();
@@ -40,7 +56,7 @@ function addFolder() {
   padding: 16px 8px;
   overflow-y: auto;
 
-  div+div {
+  div + div {
     margin-top: 4px;
   }
 
