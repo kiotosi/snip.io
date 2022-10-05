@@ -56,7 +56,15 @@ export default defineStore('snippets', {
      * @returns Last snippets id
      */
     lastSnippetID(state): number {
-      return Math.max(...state.snippets.map((snippet) => snippet.id));
+      const ids = state.snippets
+        .filter((snippet) => snippet.id >= 0)
+        .map((snippet) => snippet.id);
+
+      if (ids.length === 0) {
+        return -1;
+      }
+
+      return Math.max(...ids);
     },
 
     /**
@@ -64,7 +72,13 @@ export default defineStore('snippets', {
      * @returns Last directory id
      */
     lastDirectoryID(state): number {
-      return Math.max(...state.directories.map((folder) => folder.id));
+      const ids = state.directories.map((folder) => folder.id);
+
+      if (ids.length === 0) {
+        return -1;
+      }
+
+      return Math.max(...ids);
     },
   },
 });

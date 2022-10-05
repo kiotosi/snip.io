@@ -2,26 +2,16 @@
   "directories": [
     {
       "id": 0,
-      "name": "🥸 Home",
+      "name": "Tutorial",
       "snippets_list": [0]
-    },
-    {
-      "id": 1,
-      "name": "🤔 University",
-      "snippets_list": [1]
-    },
-    {
-      "id": 2,
-      "name": "👨‍💻 Work",
-      "snippets_list": [2,3]
-    },
+    }
   ],
   "snippets": [
     {
       "id": 0,
-      "title": "Hello, World!",
+      "title": "Hi!",
       "language": "rust",
-      "description": "Simple example of hello world :)",
+      "description": "Welcome to simple snippet editor (snip.io)\nHere you can create directories and snippets of course, snipio supports many languages markup through Prism.js.\nAll snippets saves on exit or via Ctrl + S. Have fun!\nRepository: https://github.com/crackidocky/snip.io\nCoded with 💖 by crackidocky",
       "code": "println!(\"Hello, World!\");"
     },
     {

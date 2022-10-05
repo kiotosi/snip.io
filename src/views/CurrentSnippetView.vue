@@ -49,7 +49,6 @@ function onDescriptionInput(e: Event) {
 
 function onCodeInput(code: string) {
   currentSnippet.value.code = code;
-  console.log(currentSnippet.value.code);
 }
 </script>
 

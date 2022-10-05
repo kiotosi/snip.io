@@ -14,7 +14,9 @@ fn init_snippets() -> Snippets {
         snip.create().expect("Can't create a new snipio folder");
     });
 
-    snip.load().expect("Can't load snippets file!");
+    if (snip.content.is_empty()) {
+        snip.load().expect("Can't load snippets file!");
+    }
     snip.parse().expect("Can't parse snippets!");
     snip
 }

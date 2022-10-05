@@ -38,6 +38,10 @@ const snippetsList = computed<SnippetsSchema[]>(() => {
 });
 
 function addSnippet(): void {
+
+  if (snippetsStore.directories.length === 0) {
+    return;
+  }
   const newID = snippetsStore.lastSnippetID + 1;
   const snippetMockup = createSnippetMock(newID);
 

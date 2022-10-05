@@ -136,7 +136,7 @@ pub mod snippets {
         ///
         /// ```
         pub fn create(&mut self) -> io::Result<()> {
-            let content = "[]";
+            let content = r#"{"directories": [], "snippets": []}"#;
             fs::create_dir(&self.path.config_dir);
             let mut file = fs::File::create(&self.path.snippets_file)?;
             file.write(content.as_bytes())?;

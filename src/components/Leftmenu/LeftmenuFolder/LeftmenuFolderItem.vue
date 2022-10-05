@@ -46,6 +46,10 @@ function startRename() {
 }
 
 function deleteFolder() {
+
+  if (snippetsStore.directories.length === 1) {
+    return;
+  }
   
   // Getting folder index in store
   const currentFolderID = snippetsStore.directories.findIndex((folder) => folder.id === props.id);
