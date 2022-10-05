@@ -24,6 +24,9 @@
 - Autosave of your notes on exit
 - Provides support of many languages (see table in the bottom of the README)
 
+<img width="1112" alt="image" src="https://user-images.githubusercontent.com/101672047/194110309-c36661f0-e6ec-4030-a167-a3f4b0e0acb2.png">
+
+
 # Why?
 
 Because there is no free snippet manager with normal UI 💁‍♂️
