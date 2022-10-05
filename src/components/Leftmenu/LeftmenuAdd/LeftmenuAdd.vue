@@ -1,0 +1,27 @@
+<template>
+  <div class="leftmenu-folder-add">
+    <i class="bi bi-plus-lg leftmenu-folder-add__icon"></i>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped lang="less">
+  .leftmenu-folder-add {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4px;
+    background-color: @gray-alt;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: @white;
+
+    &:hover {
+      .highlight();
+    }
+  }
+</style>

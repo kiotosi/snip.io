@@ -1,40 +1,60 @@
 <template>
-  <div class="leftmenu-snippets">
-    <SnippetsItem @click="selectSnippet(snippet.id)" v-for="snippet in snippetsList" :title="snippet.title" :language="snippet.language" :key="snippet.id"
-      :is-active="snippet.id === currentSnippet" />
-  </div>
+  <TransitionGroup>
+    <div class="leftmenu-snippets">
+      <LeftmenuSnippetItem v-for="snippet in snippetsList" :title="snippet.title" :id="snippet.id"
+        :language="snippet.language" :key="snippet.id" :is-active="snippet.id === currentSnippetID" />
+      <LeftmenuAdd @click="addSnippet" class="leftmenu-snippets__adder" />
+    </div>
+  </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
-import SnippetsItem from './SnippetsItem.vue';
+import LeftmenuSnippetItem from './LeftmenuSnippetItem.vue';
+import LeftmenuAdd from '../LeftmenuAdd/LeftmenuAdd.vue';
 import useSnippetsStore from '../../../store/snippets.store';
 import usePagerStore from '../../../store/pager.store';
-import { SnippetSchema } from '../../../typescript/types/snippetsStore';
+import { SnippetsSchema } from '../../../typescript/types/snippetsStore';
 import { computed } from 'vue';
+import { createSnippetMock } from '../../../typescript/creator';
 
 // Stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
 
 // Pager ID's
-const currentDirectory = computed(() => pagerStore.currentDirectory);
-const currentSnippet = computed(() => pagerStore.currentSnippet);
+const currentDirectoryID = computed(() => pagerStore.currentDirectory);
+const currentSnippetID = computed(() => pagerStore.currentSnippet);
 
 // Current snippet list
-const snippetsList = computed<SnippetSchema[]>(() => {
-  return snippetsStore.folders.
-    filter(folder => folder.id === currentDirectory.value).at(0)?.snippets ?? [];
+const snippetsList = computed<SnippetsSchema[]>(() => {
+
+  // Current directory sub-items identificators
+  const snippetsListID = snippetsStore.directories
+    .filter(folder => folder.id === currentDirectoryID.value)
+    .at(0)?.snippets_list;
+
+  if (!snippetsListID) {
+    return [];
+  }
+  return snippetsStore.snippets.filter(snippet => snippetsListID.includes(snippet.id));
 });
 
-/**
- * Select the snippet
- * @param id ID of current snippet
- */
-function selectSnippet(id: number) {
-  pagerStore.currentSnippet = id;
-  pagerStore.savePagerInfo();
-}
+function addSnippet(): void {
+  const newID = snippetsStore.lastSnippetID + 1;
+  const snippetMockup = createSnippetMock(newID);
 
+  // Push new snippet
+  snippetsStore.snippets.push(snippetMockup);
+
+  // Push new ID to current directoty
+  const currentDirectory = snippetsStore.directories.filter(folder => folder.id === currentDirectoryID.value).at(0);
+
+  if (currentDirectory) {
+    currentDirectory.snippets_list.push(newID);
+    pagerStore.currentSnippet = newID;
+    pagerStore.savePagerInfo();
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -43,5 +63,17 @@ function selectSnippet(id: number) {
   height: 100vh;
   width: 200px;
   padding: 16px 8px;
+  overflow-y: auto;
+
+  &__adder {
+    margin-top: 5px;
+    display: none;
+  }
+
+  &:hover {
+    .leftmenu-snippets__adder {
+      display: flex;
+    }
+  }
 }
 </style>

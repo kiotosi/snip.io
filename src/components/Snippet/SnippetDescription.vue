@@ -1,10 +1,10 @@
 <template>
-  <textarea :value="snippetDescription" placeholder="Type description to your snippet" name="description" class="snippet-description"></textarea>
+  <textarea :value="description" placeholder="Type description to your snippet" name="description" class="snippet-description"></textarea>
 </template>
 
 <script lang="ts" setup>
   defineProps({
-    snippetDescription: {
+    description: {
       type: String,
       required: true
     }

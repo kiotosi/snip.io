@@ -1,57 +1,32 @@
 import { defineStore } from 'pinia';
 import {
   LeftmenuFolderList,
-  SnippetSchema,
+  SnippetsSchema,
   SnippetsStore,
 } from '../typescript/types/snippetsStore';
 
 export default defineStore('snippets', {
   state: () =>
     ({
-      folders: [],
+      directories: [],
+      snippets: [],
+      // IMPL Maybe we can implement here `currentSnippet`, for changing it not through computed proprty in CurrentSnippet.vue
     } as SnippetsStore),
 
   actions: {
     /**
      * Count snippets in folder
-     * @param name Name of a folder
+     * @param id ID of folder
      * @returns Amount of snippets in folder
      */
-    countSnippets(name: string): number {
-      for (const folder of this.folders) {
-        if (folder.name === name) {
-          return folder.snippets.length;
+    countSnippets(id: number): number {
+      for (const folder of this.directories) {
+        if (folder.id === id) {
+          return folder.snippets_list.length;
         }
       }
 
       return 0;
-    },
-
-    getActualIndexes(folderId: number, snippetId: number): [number, number] {
-      let directoryIndex = -1;
-      let snippetIndex = -1;
-
-      // Searching for folder
-      for (const [index, folder] of this.folders.entries()) {
-        if (folder.id === folderId) {
-          directoryIndex = index;
-          break;
-        }
-      }
-
-      // Searching for snippet
-      if (directoryIndex !== -1) {
-        for (const [index, snippet] of this.folders[
-          directoryIndex
-        ].snippets.entries()) {
-          if (snippet.id === snippetId) {
-            snippetIndex = index;
-            break;
-          }
-        }
-      }
-
-      return [directoryIndex, snippetIndex];
     },
   },
 
@@ -60,11 +35,11 @@ export default defineStore('snippets', {
      * Retrieve folders for leftmenu
      * @returns All folder names
      */
-    folderList(state): LeftmenuFolderList {
-      return state.folders.map((folder) => ({
+    directoryList(state): LeftmenuFolderList {
+      return state.directories.map((folder) => ({
         name: folder.name,
         id: folder.id,
-        snippetsAmount: folder.snippets.length,
+        snippetsAmount: folder.snippets_list.length,
       }));
     },
 
@@ -72,22 +47,34 @@ export default defineStore('snippets', {
      * Retrieve all snippets
      * @returns All snippets in all folder
      */
-    allSnippetsList(state): SnippetSchema[] {
-      const snippets: SnippetSchema[] = [];
-
-      state.folders.forEach((folder) => {
-        snippets.push(...folder.snippets);
-      });
-
-      return snippets;
+    allSnippetsList(state): SnippetsSchema[] {
+      return state.snippets;
     },
 
     /**
      * Get last ID for the snippet
      * @returns Last snippets id
      */
-    lastSnippetID(): number {
-      return Math.max(...this.allSnippetsList.map((snippet) => snippet.id));
+    lastSnippetID(state): number {
+      return Math.max(...state.snippets.map((snippet) => snippet.id));
+    },
+
+    /**
+     * Get last ID for the directory
+     * @returns Last directory id
+     */
+    lastDirectoryID(state): number {
+      return Math.max(...state.directories.map((folder) => folder.id));
     },
   },
 });
+
+///
+
+// Достать сниппет
+// Добавить сниппет
+// Удалить сниппет
+// Изменить сниппет
+// Удалить директорию
+// Добавить директорию
+// Изменить имя директории

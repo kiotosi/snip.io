@@ -1,35 +1,49 @@
-[
-  {
-    "name": "Home",
-    "id": 0,
-    "snippets": [
-      {
-        "id": 0,
-        "title": "Hello, World on cpp",
-        "language": "cpp",
-        "description": "Simple example of hello world",
-        "code": "hello\nworld"
-      },
-      {
-        "id": 1,
-        "title": "Hello, World on rust",
-        "language": "rust",
-        "description": "Simple example of hello world :)",
-        "code": "println!(\"Hello, World!\");"
-      }
-    ]
-  },
-  {
-    "name": "Work",
-    "id": 1,
-    "snippets": [
-      {
-        "id": 2,
-        "title": "Hello, World on rust",
-        "language": "rust",
-        "description": "Simple example of hello world :)",
-        "code": "println!(\"Hello, World!\");"
-      }
-    ]
-  }
-]
+{
+  "directories": [
+    {
+      "id": 0,
+      "name": "🥸 Home",
+      "snippets_list": [0]
+    },
+    {
+      "id": 1,
+      "name": "🤔 University",
+      "snippets_list": [1]
+    },
+    {
+      "id": 2,
+      "name": "👨‍💻 Work",
+      "snippets_list": [2,3]
+    },
+  ],
+  "snippets": [
+    {
+      "id": 0,
+      "title": "Hello, World!",
+      "language": "rust",
+      "description": "Simple example of hello world :)",
+      "code": "println!(\"Hello, World!\");"
+    },
+    {
+      "id": 1,
+      "title": "Hello, World!",
+      "language": "cpp",
+      "description": "My first program on c++",
+      "code": "#include <iostream>\nusing namespace std;\nint main() {\ncout << \"Hello, World!\" << endl; // This prints Hello, World!\nreturn 0;\n}"
+    },
+    {
+      "id": 2,
+      "title": "Hello, World!",
+      "language": "js",
+      "description": "Simple program on javascript",
+      "code": "console.log('Hello, World')"
+    },
+    {
+      "id": 3,
+      "title": "Hello, World!",
+      "language": "ts",
+      "description": "Simple program on typescript",
+      "code": "console.log('Hello, world!')"
+    }
+  ]
+}

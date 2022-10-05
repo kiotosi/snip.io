@@ -4,7 +4,7 @@ import { languages } from 'prismjs/components.json';
 export type SnippetLanguage = keyof typeof languages;
 
 // Default snippet interface
-export interface SnippetSchema {
+export interface SnippetsSchema {
   id: number;
   title: string;
   language: SnippetLanguage;
@@ -13,15 +13,16 @@ export interface SnippetSchema {
 }
 
 // Folder for snippets
-export interface FolderSchema {
+export interface DirectorySchema {
   name: string;
   id: number;
-  snippets: SnippetSchema[];
+  snippets_list: number[];
 }
 
 // Pinia store
 export interface SnippetsStore {
-  folders: FolderSchema[];
+  directories: DirectorySchema[];
+  snippets: SnippetsSchema[];
 }
 
 // -- Leftmenu -- //

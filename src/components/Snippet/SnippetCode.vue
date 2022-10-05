@@ -12,8 +12,8 @@ const snippetEditor = ref(null) as unknown as Ref<HTMLElement>;
 let editor: Codeflask;
 
 const props = defineProps<{
-  snippetLanguage: SnippetLanguage,
-  snippetCode: string
+  language: SnippetLanguage,
+  code: string
 }>();
 
 
@@ -32,10 +32,10 @@ onUpdated(() => {
  */
 function initializeEditor(editor: Codeflask) {
   editor = new Codeflask(snippetEditor.value, {
-    language: props.snippetLanguage
+    language: props.language
   });
-  editor.addLanguage(props.snippetLanguage, Prism.languages[props.snippetLanguage] as Prism.Languages);
-  editor.updateCode(props.snippetCode);
+  editor.addLanguage(props.language, Prism.languages[props.language] as Prism.Languages);
+  editor.updateCode(props.code);
 }
 </script>
 

@@ -1,24 +1,23 @@
 <template>
   <div class="container">
     <div v-if="currentSnippet" class="snippet">
-      <SnippetTitle :title="title" />
-      <SnippetLanguageSelector @change="onChangeLanguage" :snippet-lang="currentSnippet.language" />
-      <SnippetDescription  :snippet-description="description" />
-      <SnippetCode :snippet-language="currentSnippet.language" :snippet-code="code" />
+      <SnippetTitle @focusout="onTitleInput" :title="currentSnippet.title" />
+      <SnippetLanguageSelector @change="onLanguageSelect" :language="currentSnippet.language" />
+      <SnippetDescription @focusout="onDescriptionInput" :description="currentSnippet.description" />
+      <SnippetCode :language="currentSnippet.language" :code="currentSnippet.code" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import SnippetTitle from '../components/Snippet/SnippetTitle.vue';
 import SnippetDescription from '../components/Snippet/SnippetDescription.vue';
 import SnippetLanguageSelector from '../components/Snippet/SnippetLanguageSelector.vue';
 import SnippetCode from '../components/Snippet/SnippetCode.vue';
-import { computed } from 'vue';
 import useSnippetsStore from '../store/snippets.store';
-import { SnippetLanguage, SnippetSchema } from '../typescript/types/snippetsStore';
 import usePagerStore from '../store/pager.store';
-import { ref } from 'vue';
+import { SnippetLanguage, SnippetsSchema } from '../typescript/types/snippetsStore';
 
 // IMPL: Need to implement mixin with stores and id's
 // Stores
@@ -26,41 +25,26 @@ const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
 
 // Pager ID's
-const currentDirectoryID = ref(pagerStore.currentDirectory);
-const currentSnippetID = ref(pagerStore.currentSnippet);
+const currentSnippetID = computed(() => pagerStore.currentSnippet);
 
-// Subscribe to pager snippet state
-pagerStore.$subscribe((mutation, state) => {
-  
-  // We must change snippet only if we cnage current snippet
-  // This hack is used because, when we changed directory our snippet non exists in currentDirectoryID
-  if (mutation.type === 'direct' && state.currentSnippet !== currentSnippetID.value ){
-    currentDirectoryID.value = state.currentDirectory;
-    currentSnippetID.value = state.currentSnippet;
-  }
-});
+const currentSnippet = computed<SnippetsSchema>(() => snippetsStore.snippets
+  .filter(snippet => snippet.id === currentSnippetID.value)[0]
+);
 
-// Current indexes in array of snippets (in store)
-const actualIndexes = computed(() => {
-  return snippetsStore
-    .getActualIndexes(currentDirectoryID.value, currentSnippetID.value);
-});
-// Current snippet
-const currentSnippet = computed<SnippetSchema>(() => {
-  return snippetsStore.folders[actualIndexes.value[0]]?.snippets[actualIndexes.value[1]];
-});
+function onTitleInput(e: Event) {
+  const element = e.target as HTMLElement;
+  element.innerText = element.innerText.trim().slice(0, 50);
+  currentSnippet.value.title = element.innerText;
+}
 
-const title = ref(currentSnippet.value?.title ?? '');
-const description = ref(currentSnippet.value?.description ?? '');
-const code = ref(currentSnippet.value?.code ?? '');
-
-/**
- * Event on change language of snippet in editor
- * @param e Change event
- */
-function onChangeLanguage(e: Event): void {
+function onLanguageSelect(e: Event) {
   const element = e.target as HTMLSelectElement;
-  snippetsStore.folders[actualIndexes.value[0]].snippets[actualIndexes.value[1]].language = element.value as SnippetLanguage;
+  currentSnippet.value.language = element.value as SnippetLanguage;
+}
+
+function onDescriptionInput(e: Event) {
+  const element = e.target as HTMLTextAreaElement;
+  currentSnippet.value.description = element.value;
 }
 </script>
 

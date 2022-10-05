@@ -1,6 +1,7 @@
 import { INVOKE_METHODS } from '../define';
 import { invoke } from '@tauri-apps/api';
-import { FolderSchema } from './types/snippetsStore';
+import { SnippetsStore } from './types/snippetsStore';
+import { TauriEvent, listen } from '@tauri-apps/api/event';
 
 export default {
   snippets: {
@@ -8,16 +9,16 @@ export default {
      * Load snippets.json
      * @returns JSON from snippets.json
      */
-    async loadSnippetsFile(): Promise<FolderSchema[]> {
-      return JSON.parse(await invoke<string>('get_snippets')) as FolderSchema[];
+    async loadSnippetsFile(): Promise<SnippetsStore> {
+      return JSON.parse(await invoke<string>('get_snippets')) as SnippetsStore;
     },
 
     /**
      * Saves snippets to snippets.json
      * @param snippetsObject Snippets object from store
      */
-    saveSnippetsFile(json: string): void {
-      invoke(INVOKE_METHODS.snippets.save, {
+    async saveSnippetsFile(json: string): Promise<void> {
+      await invoke(INVOKE_METHODS.snippets.save, {
         json,
       });
     },
