@@ -1,8 +1,7 @@
 <template>
   <div class="app-wrapper">
     <LeftmenuMain />
-    <EmptySnippetView v-if="currentSnippetID === -1" />
-    <CurrentSnippetView v-else />
+    <CurrentSnippetView />
   </div>
 </template>
 
@@ -10,12 +9,11 @@
 
 // Components
 import LeftmenuMain from "./components/Leftmenu/LeftmenuMain.vue";
-import EmptySnippetView from "./views/EmptySnippetView.vue";
 import CurrentSnippetView from "./views/CurrentSnippetView.vue";
 import { appWindow } from "@tauri-apps/api/window";
 
 // Hooks
-import { computed, onBeforeMount } from 'vue';
+import { onBeforeMount } from 'vue';
 
 // Store
 import useSnippetsStore from './store/snippets.store';
@@ -27,9 +25,6 @@ import System from "./typescript/system";
 // Use stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
-
-// Selected snippet id
-const currentSnippetID = computed(() => pagerStore.currentSnippet);
 
 onBeforeMount(async () => {
 

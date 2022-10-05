@@ -48,12 +48,13 @@ function onSave() {
 </script>
 
 <style scoped lang="less">
-  .snippet-code {
-    position: relative;
-    width: 100%;
-    height: 210px;
-    flex-grow: 1;
-    margin-top: 2rem;
-    .default-border();
-  }
+.snippet-code {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  flex-grow: 1;
+  margin-top: 2rem;
+  position: relative;
+  .default-border();
+}
 </style>

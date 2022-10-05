@@ -1,19 +1,14 @@
 <template>
-  <h1 placeholder="Title of the snippet"
-  contenteditable="true"
+  <input type="text" placeholder="Title of the snippet"
   spellcheck="false"
-  @keydown="onKeyDown"
+  :value="$props.title"
   class="snippet-title"
-  type="text" name="title"
-    id="snippet-title-ref">
-    {{$props.title}}
-  </h1>
+  name="title"
+  maxlength="50"
+  id="snippet-title-ref">
 </template>
 
 <script lang="ts" setup>
-  
-  // Limit of characters in input
-  const CHARACTER_LIMIT = 55;
 
   // Props
   defineProps({
@@ -22,28 +17,39 @@
       reqiured: true
     }
   });
-
-  /**
-   * Stop input, when there is character limit
-   * @param e Keydown event
-   */
-  function onKeyDown(e: KeyboardEvent) {
-    const element = e.target as HTMLElement;
-    if (element.innerText.length > CHARACTER_LIMIT && e.code !== 'Backspace') {
-      e.preventDefault();
-    }
-  }
 </script>
 
 <style scoped lang="less">
 .snippet-title {
   width: 100%;
   font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
   background: @white;
   color: @gray;
   font-weight: normal;
   padding: 12px 10px;
   .default-border();
+  position: relative;
+
+  &::before {
+    content: 'Title';
+    top: -1rem;
+    left: 2px;
+    position: absolute;
+    font-size: 10px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    transform: translateY(1em);
+    opacity: 0;
+  }
+
+  &:focus {
+    &:before {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 
   &:empty:before {
     color: fadeout(@gray-alt, 40%);

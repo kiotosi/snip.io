@@ -6,6 +6,7 @@
       <SnippetDescription @focusout="onDescriptionInput" :description="currentSnippet.description" />
       <SnippetCode @save-code="onCodeInput" :language="currentSnippet.language" :code="currentSnippet.code" />
     </div>
+    <EmptySnippetView v-else />
   </div>
 </template>
 
@@ -18,8 +19,8 @@ import SnippetCode from '../components/Snippet/SnippetCode.vue';
 import useSnippetsStore from '../store/snippets.store';
 import usePagerStore from '../store/pager.store';
 import { SnippetLanguage, SnippetsSchema } from '../typescript/types/snippetsStore';
+import EmptySnippetView from './EmptySnippetView.vue';
 
-// IMPL: Need to implement mixin with stores and id's
 // Stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
@@ -32,9 +33,9 @@ const currentSnippet = computed<SnippetsSchema>(() => snippetsStore.snippets
 );
 
 function onTitleInput(e: Event) {
-  const element = e.target as HTMLElement;
-  element.innerText = element.innerText.trim().slice(0, 50);
-  currentSnippet.value.title = element.innerText;
+  const element = e.target as HTMLInputElement;
+  element.value = element.value.trim();
+  currentSnippet.value.title = element.value;
 }
 
 function onLanguageSelect(e: Event) {
