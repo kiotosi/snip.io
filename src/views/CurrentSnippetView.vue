@@ -4,7 +4,7 @@
       <SnippetTitle @focusout="onTitleInput" :title="currentSnippet.title" />
       <SnippetLanguageSelector @change="onLanguageSelect" :language="currentSnippet.language" />
       <SnippetDescription @focusout="onDescriptionInput" :description="currentSnippet.description" />
-      <SnippetCode :language="currentSnippet.language" :code="currentSnippet.code" />
+      <SnippetCode @save-code="onCodeInput" :language="currentSnippet.language" :code="currentSnippet.code" />
     </div>
   </div>
 </template>
@@ -45,6 +45,11 @@ function onLanguageSelect(e: Event) {
 function onDescriptionInput(e: Event) {
   const element = e.target as HTMLTextAreaElement;
   currentSnippet.value.description = element.value;
+}
+
+function onCodeInput(code: string) {
+  currentSnippet.value.code = code;
+  console.log(currentSnippet.value.code);
 }
 </script>
 

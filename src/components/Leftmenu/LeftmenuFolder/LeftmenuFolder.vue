@@ -1,11 +1,11 @@
 <template>
-  <TransitionGroup>
-    <div ref="leftmenuFolderReference" class="leftmenu-folder">
+  <div ref="leftmenuFolderReference" class="leftmenu-folder">
+    <TransitionGroup name="folder">
       <DirectoryItem v-for="item in directoryList" :key="item.id" v-bind="item"
         :is-active="item.id === activeDirectoryID" />
-      <LeftmenuAdd class="leftmenu-folder__adder" @click="addFolder" />
-    </div>
-  </TransitionGroup>
+      <LeftmenuAdd :key="'adder'" class="leftmenu-folder__adder" @click="addFolder" />
+    </TransitionGroup>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -53,5 +53,16 @@ function addFolder() {
       display: flex;
     }
   }
+}
+
+// Transition
+.folder-enter-active,
+.folder-leave-active {
+  transition: all 0.33s ease;
+}
+.folder-enter-from,
+.folder-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
 }
 </style>

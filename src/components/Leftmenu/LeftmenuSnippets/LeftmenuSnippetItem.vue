@@ -1,10 +1,15 @@
 <template>
-  <div @click="selectSnippet(id)"  class="leftmenu-snippets-item" :class="{'leftmenu-snippets-item_active': isActive}">
-    <div class="leftmenu-snippets-item__name">
-      {{title}}
+  <div @click="selectSnippet"  class="leftmenu-snippets-item" :class="{'leftmenu-snippets-item_active': isActive}">
+    <div class="leftmenu-snippet-item__info">
+      <div class="leftmenu-snippets-item__name">
+        {{title}}
+      </div>
+      <div class="leftmenu-snippets-item__language">
+        {{LANGUAGES_SELECTOR_LIST[language as keyof typeof LANGUAGES_SELECTOR_LIST]}}
+      </div>
     </div>
-    <div class="leftmenu-snippets-item__language">
-      {{LANGUAGES_SELECTOR_LIST[language as keyof typeof LANGUAGES_SELECTOR_LIST]}}
+    <div @click="deleteSnippet" class="leftmenu-snippets-item__trash">
+      <i class="bi bi-trash"></i>
     </div>
   </div>
 </template>
@@ -12,9 +17,11 @@
 <script setup lang="ts">
 import { LANGUAGES_SELECTOR_LIST } from '../../../define';
 import usePagerStore from '../../../store/pager.store';
+import useSnippetsStore from '../../../store/snippets.store';
 
 // Store
 const pagerStore = usePagerStore();
+const snippetsStore = useSnippetsStore();
 
 // Props
 interface SnippetsItemProps {
@@ -23,15 +30,32 @@ interface SnippetsItemProps {
   isActive?: boolean
   id: number
 }
-defineProps<SnippetsItemProps>();
+const props = defineProps<SnippetsItemProps>();
 
 /**
  * Select the snippet
  * @param id ID of current snippet
  */
-function selectSnippet(id: number) {
-  pagerStore.currentSnippet = id;
+function selectSnippet() {
+  pagerStore.currentSnippet = props.id;
   pagerStore.savePagerInfo();
+}
+
+function deleteSnippet() {
+  if (pagerStore.currentSnippet === props.id) {
+    pagerStore.currentSnippet = -1;
+  }
+
+  // Delete index from directory
+  const directoryIndex = snippetsStore.directories.findIndex(folder => folder.id === pagerStore.currentDirectory);
+  snippetsStore.directories[directoryIndex].snippets_list = snippetsStore
+    .directories[directoryIndex]
+    .snippets_list.filter(id => id !== props.id);
+
+  
+  // Delete snippet
+  const index = snippetsStore.snippets.findIndex(snippet => snippet.id === props.id);
+  snippetsStore.snippets.splice(index, 1);
 }
 </script>
 
@@ -39,6 +63,9 @@ function selectSnippet(id: number) {
 .leftmenu-snippets-item {
   width: 100%;
   padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   border-radius: 5px;
   color: @gray;
@@ -56,6 +83,9 @@ function selectSnippet(id: number) {
 
   &:hover {
     .highlight();
+    .leftmenu-snippets-item__trash {
+      display: block;
+    }
   }
 
   &__name {
@@ -67,5 +97,12 @@ function selectSnippet(id: number) {
     margin-top: 4px;
     font-size: 10px;
   }
+  &__trash {
+    display: none;
+    &:hover {
+      color: @red-alt;
+    }
+  }
 }
+
 </style>

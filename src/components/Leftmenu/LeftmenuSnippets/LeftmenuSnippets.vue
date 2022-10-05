@@ -1,11 +1,9 @@
 <template>
-  <TransitionGroup>
     <div class="leftmenu-snippets">
       <LeftmenuSnippetItem v-for="snippet in snippetsList" :title="snippet.title" :id="snippet.id"
         :language="snippet.language" :key="snippet.id" :is-active="snippet.id === currentSnippetID" />
       <LeftmenuAdd @click="addSnippet" class="leftmenu-snippets__adder" />
     </div>
-  </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
