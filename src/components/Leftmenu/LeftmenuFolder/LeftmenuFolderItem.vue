@@ -125,7 +125,7 @@ function selectFolder(): void {
   width: 100%;
   padding: 4px 8px;
   border-radius: 5px;
-  color: @gray;
+  color: var(--text);
   min-height: 24px;
 
   &_display {
@@ -137,8 +137,8 @@ function selectFolder(): void {
   }
 
   &_active {
-    background-color: @teal-alt;
-    color: @white-bg;
+    background-color: var(--leftmenu-folder-accent);
+    color: var(--text-highlight);
   }
 
   & + & {
@@ -153,7 +153,7 @@ function selectFolder(): void {
 
       &:hover {
         i {
-          color: @red-alt;
+          color: var(--trash);
         }
       }
     }
@@ -165,7 +165,7 @@ function selectFolder(): void {
     outline: none;
     border: none;
     background-color: transparent;
-    color: @white;
+    color: var(--text-highlight);
   }
 
   &__name {

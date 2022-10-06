@@ -1,22 +1,24 @@
 <template>
-  <input type="text" placeholder="Title of the snippet"
-  spellcheck="false"
-  :value="$props.title"
-  class="snippet-title"
-  name="title"
-  maxlength="50"
-  id="snippet-title-ref">
+  <input
+    type="text"
+    placeholder="Title of the snippet"
+    spellcheck="false"
+    :value="$props.title"
+    class="snippet-title"
+    name="title"
+    maxlength="50"
+    id="snippet-title-ref"
+  />
 </template>
 
 <script lang="ts" setup>
-
-  // Props
-  defineProps({
-    title: {
-      type: String,
-      reqiured: true
-    }
-  });
+// Props
+defineProps({
+  title: {
+    type: String,
+    reqiured: true,
+  },
+});
 </script>
 
 <style scoped lang="less">
@@ -25,8 +27,8 @@
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 1rem;
-  background: @white;
-  color: @gray;
+  background: var(--input-bg);
+  color: var(--text);
   font-weight: normal;
   padding: 12px 10px;
   .default-border();
@@ -38,8 +40,8 @@
     left: 2px;
     position: absolute;
     font-size: 10px;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     transform: translateY(1em);
     opacity: 0;
   }
@@ -52,7 +54,7 @@
   }
 
   &:empty:before {
-    color: fadeout(@gray-alt, 40%);
+    color: var(--placeholder);
     content: attr(placeholder);
   }
 }

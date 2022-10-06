@@ -1,45 +1,174 @@
-@black: #434343;
-@white: #FFFFFF;
-@white-bg: #F8F8F8;
+:root {
+  // Main background
+  --background: #F8F8F8;
 
-@gray-bg: rgba(233, 233, 233, 0.95);
-@gray-bg-alt: rgb(237, 237, 237);
+  // Text
+  --text: #8E8E93;
+  --text-highlight: #fff;
+  --placeholder: rgb(197, 197, 197);
 
-@blue: #007AFF;
-@blue-alt: #0A84FF;
+  // Leftmenu
+  --leftmenu-folder-bg: #e9e9e9f2;
+  --leftmenu-snippets-bg: #ededed;
 
-@brown: #A2845E;
-@brown-alt: #AC8E68;
+  // Current folder
+  --leftmenu-folder-accent:#A1A1AA;
 
-@cyan: #55BEF0;
-@cyan-alt: #5AC8F5;
+  // Current snippet
+  --leftmenu-snippet-accent: #A8A29E;
 
-@gray: #8E8E93;
-@gray-alt: #98989D;
+  // Adder button (same color as text)
+  --leftmenu-adder-bg: var(--text);
 
-@green: #28CD41;
-@green-alt: #32D74B;
+  // Text input backgrounds
+  --input-bg: white;
+  --input-shadow-bg: rgba(0, 0, 0, 0.03);
 
-@indigo: #5856D6;
-@indigo-alt: #5E5CE6;
+  // Decorative elements
+  --trash: #FF375F;
+}
 
-@mint: #00C7BE;
-@mint-alt: #66D4CF;
+// CODE COLORSCHEME //
+:root {
 
-@orange: #FF9500;
-@orange-alt: #FF9F0A;
+  // Based on Catpuccin Latte
+  // https://github.com/catppuccin/catppuccin#-palettes
+  --code-variable: #414559		;
+  --code-background: #ccd0da	;
+  --code-punctuation: #6c6f85	;
+  --code-keyword: #dc8a78	;
+  --code-operator:#dd7878;
+  --code-string: #209fb5	;
+  --code-comment: #8c8fa1	;
+  --code-function: #df8e1d	;
+  --code-boolean: #8839ef	;
+  --code-number: #40a02b	;
+  --code-selector: #04a5e5	;
+  --code-property: #e64553	;
+  --code-tag: #7287fd;
+  --code-attr: #5c5f77	;
+  --code-cursor: #4c4f69	;
+}
 
-@pink: #FF2D55;
-@pink-alt: #FF375F;
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Main background
+    --background: #37312d;
 
-@purple: #AF52DE;
-@purple-alt: #BF5AF2;
+    // Text
+    --text: #D4D4D8;
+    --text-highlight: #F4F4F5;
+    --placeholder: rgb(197, 197, 197);
 
-@red: #FF3B30;
-@red-alt: #FF453A;
+    // Leftmenu
+    --leftmenu-folder-bg: #26221f;
+    --leftmenu-snippets-bg: #302b27;
 
-@teal: #59ADC4;
-@teal-alt: #6AC4DC;
+    // Current folder
+    --leftmenu-folder-accent: #2563EB;
 
-@yellow: #FFCC00;
-@yellow-alt: #FFD60A;
+    // Current snippet
+    --leftmenu-snippet-accent: #047857;
+
+    // Adder button (same color as text)
+    --leftmenu-adder-bg: #4B5563;
+
+    // Text input backgrounds
+    --input-bg: #292521;
+    --input-shadow-bg: rgba(255, 255, 255, 0.09);
+
+    // Decorative elements
+    --trash: #F472B6;
+  }
+
+  // CODE COLORSCHEME //
+  :root {
+    --code-variable: #cf6a4c;
+    --code-background: #1e1e1e;
+    --code-punctuation: #c3c3c3;
+    --code-keyword: #9b859d;
+    --code-operator: #c3c3c3;
+    --code-string: #8f9d6a;
+    --code-comment: #5f5a60;
+    --code-function: #9b859d;
+    --code-boolean: #afc4db;
+    --code-number: #cda869;
+    --code-selector: #cf6a4c;
+    --code-property: #8f9d6a;
+    --code-tag: #cf6a4c;
+    --code-attr: #7587a6;
+    --code-cursor: white;
+  }
+}
+
+// Code colorizaion
+.codeflask {
+  background: var(--input-bg);
+  font-family: 'Overpass Mono', 'Fira Code', 'Monaco', monospace;
+  color: transparent;
+
+  // Antialising
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  // Fixing bold font
+  &__textarea {
+    caret-color: var(--code-cursor) !important;
+    overflow: auto;
+  }
+  &__pre {
+    color: var(--code-variable) !important;
+  }
+
+  .token {
+
+    &.punctuation {
+      color: var(--code-punctuation);
+    }
+
+    &.keyword {
+      color: var(--code-keyword);
+    }
+
+    &.operator {
+      color: var(--code-operator);
+    }
+
+    &.string {
+      color: var(--code-string);
+    }
+
+    &.comment {
+      color: var(--code-comment);
+    }
+
+    &.function {
+      color: var(--code-function);
+    }
+
+    &.boolean {
+      color: var(--code-boolean);
+    }
+
+    &.number {
+      color: var(--code-number);
+    }
+
+    &.selector {
+      color: var(--code-selector);
+    }
+
+    &.property {
+      color: var(--code-property);
+    }
+
+    &.tag {
+      color: var(--code-tag);
+    }
+
+    &.attr-value {
+      color: var(--code-attr);
+    }
+  }
+}

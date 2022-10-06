@@ -90,10 +90,10 @@ function addSnippet(): void {
 
 <style lang="less" scoped>
 .leftmenu-placeholder_snippet {
-  background-color: @gray-bg-alt;
+  background-color: var(--leftmenu-snippets-bg);
 }
 .leftmenu-snippets {
-  background-color: @gray-bg-alt;
+  background-color: var(--leftmenu-snippets-bg);
   height: 100vh;
   width: 200px;
   padding: 16px 8px;

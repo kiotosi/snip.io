@@ -52,7 +52,7 @@ function addFolder() {
 .leftmenu-folder {
   width: 200px;
   height: 100vh;
-  background-color: transparent;
+  background-color: var(--leftmenu-folder-bg);
   padding: 16px 8px;
   overflow-y: auto;
 

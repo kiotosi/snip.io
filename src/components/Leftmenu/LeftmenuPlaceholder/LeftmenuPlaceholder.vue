@@ -31,6 +31,7 @@ defineEmits(['create']);
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: var(--text);
 
   &_clickable {
     cursor: pointer;
@@ -41,7 +42,6 @@ defineEmits(['create']);
   }
 
   &__icon {
-    color: @gray;
     font-size: 3em;
   }
 
@@ -52,7 +52,6 @@ defineEmits(['create']);
     max-width: 170px;
     line-height: 1.4em;
     font-size: 12px;
-    color: @gray;
   }
 }
 </style>
