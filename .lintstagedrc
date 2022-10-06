@@ -1,4 +1,5 @@
 {
   "*.{t,j}s": ["prettier --ignore-unknown --write", "eslint --fix"],
+  "*.vue": ["prettier --ignore-unknown --write", "eslint --fix"],
   "*.md": "prettier --write"
 }

@@ -33,7 +33,6 @@ fn save_snippets(json: &str) {
 }
 
 fn main() {
-
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![get_snippets, save_snippets])
         .run(tauri::generate_context!())

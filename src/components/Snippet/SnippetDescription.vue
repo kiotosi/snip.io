@@ -21,6 +21,8 @@
   padding: 12px 10px;
   resize: vertical;
   color: @gray;
+  position: relative;
+  .default-border();
 
   &::placeholder {
     color: fadeout(@gray-alt, 40%);
@@ -29,7 +31,6 @@
   &::-webkit-scrollbar {
     display: none;
   }
-  .default-border();
 
 }
 </style>

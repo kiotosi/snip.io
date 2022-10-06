@@ -1,8 +1,8 @@
 extern crate json;
 
 mod path {
-    use std::path;
     use std::env;
+    use std::path;
 
     /// Get snippets config directory
     /// @private
@@ -25,7 +25,7 @@ mod path {
     /// **@only_new**
     pub struct SnipioPath {
         pub config_dir: path::PathBuf,
-        pub snippets_file: path::PathBuf
+        pub snippets_file: path::PathBuf,
     }
 
     impl SnipioPath {
@@ -39,7 +39,7 @@ mod path {
 }
 
 /*
-   IMPL: 
+   IMPL:
    - Load: Function to load file
    - Save: Function to save file
    - Check: Function to check directory and file
@@ -56,7 +56,7 @@ pub mod snippets {
     pub struct Snippets {
         path: super::path::SnipioPath,
         pub content: String,
-        pub json: String
+        pub json: String,
     }
 
     impl Snippets {
@@ -64,7 +64,7 @@ pub mod snippets {
             Snippets {
                 path: super::path::SnipioPath::new(),
                 content: String::new(),
-                json: String::new()
+                json: String::new(),
             }
         }
 

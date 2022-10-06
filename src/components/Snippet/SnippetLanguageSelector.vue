@@ -22,17 +22,10 @@ defineProps<{
   width: 300px;
   background: @white;
   color: @gray;
-  margin-top: 1rem;
   padding: 12px 10px;
   position: relative;
   text-overflow: ellipsis;
   white-space: nowrap;
   .default-border();
-
-  &::after {
-    content: '123';
-    position: absolute;
-  }
-
 }
 </style>

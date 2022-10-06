@@ -1,17 +1,35 @@
 <template>
-  <div v-if="isEditing" class="leftmenu-folder-item" :class="{'leftmenu-folder-item_active': isActive}">
-    <p ref="currentFolderReference" spellcheck="false" contenteditable="true" @keydown="checkRename"
-      @focusout="endRename" class="leftmenu-folder-item__edit"></p>
+  <div
+    v-if="isEditing"
+    class="leftmenu-folder-item"
+    :class="{ 'leftmenu-folder-item_active': isActive }"
+  >
+    <input
+      :value="capitalize(name)"
+      ref="directoryNameInput"
+      spellcheck="false"
+      contenteditable="true"
+      @keydown="checkRename"
+      @focusout="endRename"
+      class="leftmenu-folder-item__edit"
+    />
   </div>
 
-  <div v-else @dblclick="startRename" @click="selectFolder" class="leftmenu-folder-item leftmenu-folder-item_display"
-    :class="{'leftmenu-folder-item_active': isActive}">
-    <div class="leftmenu-folder-item__name">{{capitalize($props.name)}}</div>
+  <div
+    v-else
+    @dblclick="startRename"
+    @click="selectFolder"
+    class="leftmenu-folder-item leftmenu-folder-item_display"
+    :class="{ 'leftmenu-folder-item_active': isActive }"
+  >
+    <div class="leftmenu-folder-item__name">{{ capitalize($props.name) }}</div>
     <div class="leftmenu-folder-item__info">
       <div @click="deleteFolder" class="leftmenu-folder-item__trash">
         <i class="bi bi-trash"></i>
       </div>
-      <div class="leftmenu-folder-item__amount">{{$props.snippetsAmount}}</div>
+      <div class="leftmenu-folder-item__amount">
+        {{ $props.snippetsAmount }}
+      </div>
     </div>
   </div>
 </template>
@@ -26,42 +44,43 @@ const pagerStore = usePagerStore();
 const snippetsStore = useSnippetsStore();
 
 // Reference
-const currentFolderReference = ref<null | HTMLElement>(null);
+const directoryNameInput = ref<null | HTMLInputElement>(null);
 const isEditing = ref(false);
 
 // Props
 interface FolderItemProps {
-  name: string // Folder name
-  isActive?: boolean // Is our directory active
-  snippetsAmount: number // How many snippets in current directory
-  id: number // Id of folder
+  name: string; // Folder name
+  isActive?: boolean; // Is our directory active
+  snippetsAmount: number; // How many snippets in current directory
+  id: number; // Id of folder
 }
-const props = defineProps<FolderItemProps>()
+const props = defineProps<FolderItemProps>();
 
 function startRename() {
   isEditing.value = true;
   nextTick(() => {
-    currentFolderReference.value?.focus();
+    directoryNameInput.value?.focus();
   });
 }
 
 function deleteFolder() {
-
   if (snippetsStore.directories.length === 1) {
     return;
   }
-  
+
   // Getting folder index in store
-  const currentFolderID = snippetsStore.directories.findIndex((folder) => folder.id === props.id);
-  
+  const currentFolderID = snippetsStore.directories.findIndex(
+    (folder) => folder.id === props.id
+  );
+
   // Deleting all child snippets
   if (currentFolderID !== -1) {
-    snippetsStore.snippets = snippetsStore.snippets
-      .filter((snippet) => !snippetsStore
-        .directories[currentFolderID]
-        .snippets_list
-        .includes(snippet.id)
-      );
+    snippetsStore.snippets = snippetsStore.snippets.filter(
+      (snippet) =>
+        !snippetsStore.directories[currentFolderID].snippets_list.includes(
+          snippet.id
+        )
+    );
   }
 
   // Deleting folder
@@ -69,16 +88,18 @@ function deleteFolder() {
 
   if (props.id === pagerStore.currentDirectory) {
     pagerStore.currentDirectory = -1;
-    pagerStore.currentSnippet= -1;
+    pagerStore.currentSnippet = -1;
   }
 }
 
 function endRename() {
   isEditing.value = false;
-  const directory = snippetsStore.directories.filter(folder => folder.id === props.id).at(0);
+  const directory = snippetsStore.directories.find(
+    (folder) => folder.id === props.id
+  );
 
   if (directory) {
-    const text = currentFolderReference.value?.innerText;
+    const text = directoryNameInput.value?.value;
     directory.name = !text ? directory.name : text;
   }
 }
@@ -120,7 +141,7 @@ function selectFolder(): void {
     color: @white-bg;
   }
 
-  &+& {
+  & + & {
     margin-top: 5px;
   }
 
@@ -136,13 +157,15 @@ function selectFolder(): void {
         }
       }
     }
-
   }
 
   &__edit {
     margin: 0;
     width: 100%;
     outline: none;
+    border: none;
+    background-color: transparent;
+    color: @white;
   }
 
   &__name {

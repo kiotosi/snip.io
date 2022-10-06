@@ -19,7 +19,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./src/snippet.prism.js"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

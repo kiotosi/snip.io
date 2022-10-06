@@ -2,9 +2,7 @@
   <div class="empty-screen">
     <i class="empty-screen__icon bi bi-journals"></i>
     <div class="empty-screen__description">
-      <p class="empty-screen__text">
-        There is no selected snippets.
-      </p>
+      <p class="empty-screen__text">There is no selected snippets.</p>
       <p class="empty-screen__text">
         Please use sidebar to select snippet or create a new one.
       </p>
@@ -20,8 +18,8 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  height: 100vh;
   width: 100%;
+  height: 100%;
   text-align: center;
   color: @gray;
 
@@ -35,12 +33,13 @@
   }
 
   &__text {
+    .no-selection();
     user-select: none;
     pointer-events: none;
     margin-bottom: 0;
 
     &:not(:first-child) {
-      margin-top: .2em;
+      margin-top: 0.2em;
     }
   }
 }

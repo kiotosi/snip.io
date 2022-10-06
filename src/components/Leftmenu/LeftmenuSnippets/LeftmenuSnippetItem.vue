@@ -90,6 +90,7 @@ function deleteSnippet() {
 
   &__name {
     .text-overflow();
+    max-width: 150px;
     font-size: 14px;
   }
 

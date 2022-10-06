@@ -35,11 +35,11 @@
         "entitlements": null,
         "exceptionDomain": "",
         "frameworks": [],
-        "providerShortName": null,
+        "providerShortName": "snip",
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "Snippets manager",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
