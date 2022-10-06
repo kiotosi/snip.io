@@ -24,15 +24,16 @@
 - Autosave of your notes on exit
 - Provides support of many languages (see table in the bottom of the README)
 
-  <img alt="Light theme" src="https://user-images.githubusercontent.com/101672047/194110309-c36661f0-e6ec-4030-a167-a3f4b0e0acb2.png">
-  <img alt="Dark theme" src="https://user-images.githubusercontent.com/101672047/194380558-fba1190d-9a90-470b-bd53-798e0edcfaa5.png">
-
-
 # Why?
 
 Because there is no free snippet manager with normal UI 💁‍♂️
 
 My design isn't clear too, because I'm not a UI Designer, but I have minimal experience in developing of UI, so I've decided to make something cool, fast and useful :)
+
+# Gallery
+
+<img alt="Light theme" src="https://user-images.githubusercontent.com/101672047/194110309-c36661f0-e6ec-4030-a167-a3f4b0e0acb2.png">
+<img alt="Dark theme" src="https://user-images.githubusercontent.com/101672047/194380558-fba1190d-9a90-470b-bd53-798e0edcfaa5.png">
 
 # Roadmap
 
