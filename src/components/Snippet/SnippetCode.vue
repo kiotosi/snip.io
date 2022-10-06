@@ -34,6 +34,7 @@ onUpdated(() => {
 function initializeEditor() {
   editor = new Codeflask(snippetEditor.value as HTMLElement, {
     language: props.language,
+    defaultTheme: false,
   });
   editor.addLanguage(
     props.language,

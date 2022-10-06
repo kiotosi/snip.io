@@ -104,6 +104,7 @@ function deleteSnippet() {
     .text-overflow();
     max-width: 150px;
     font-size: 14px;
+    min-height: 1rem;
   }
 
   &__language {

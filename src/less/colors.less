@@ -12,18 +12,163 @@
   --leftmenu-snippets-bg: #ededed;
 
   // Current folder
-  --leftmenu-folder-accent: #59ADC4;
+  --leftmenu-folder-accent:#A1A1AA;
 
   // Current snippet
-  --leftmenu-snippet-accent: #A2845E;
+  --leftmenu-snippet-accent: #A8A29E;
 
   // Adder button (same color as text)
   --leftmenu-adder-bg: var(--text);
 
   // Text input backgrounds
   --input-bg: white;
-  --input-shadow-bg: rgba(0,0,0,0.03);
+  --input-shadow-bg: rgba(0, 0, 0, 0.03);
 
   // Decorative elements
   --trash: #FF375F;
+}
+
+// CODE COLORSCHEME //
+:root {
+
+  // Based on Catpuccin Latte
+  // https://github.com/catppuccin/catppuccin#-palettes
+  --code-variable: #414559		;
+  --code-background: #ccd0da	;
+  --code-punctuation: #6c6f85	;
+  --code-keyword: #dc8a78	;
+  --code-operator:#dd7878;
+  --code-string: #209fb5	;
+  --code-comment: #8c8fa1	;
+  --code-function: #df8e1d	;
+  --code-boolean: #8839ef	;
+  --code-number: #40a02b	;
+  --code-selector: #04a5e5	;
+  --code-property: #e64553	;
+  --code-tag: #7287fd;
+  --code-attr: #5c5f77	;
+  --code-cursor: #4c4f69	;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // Main background
+    --background: #37312d;
+
+    // Text
+    --text: #D4D4D8;
+    --text-highlight: #F4F4F5;
+    --placeholder: rgb(197, 197, 197);
+
+    // Leftmenu
+    --leftmenu-folder-bg: #26221f;
+    --leftmenu-snippets-bg: #302b27;
+
+    // Current folder
+    --leftmenu-folder-accent: #2563EB;
+
+    // Current snippet
+    --leftmenu-snippet-accent: #047857;
+
+    // Adder button (same color as text)
+    --leftmenu-adder-bg: #4B5563;
+
+    // Text input backgrounds
+    --input-bg: #292521;
+    --input-shadow-bg: rgba(255, 255, 255, 0.09);
+
+    // Decorative elements
+    --trash: #F472B6;
+  }
+
+  // CODE COLORSCHEME //
+  :root {
+    --code-variable: #cf6a4c;
+    --code-background: #1e1e1e;
+    --code-punctuation: #c3c3c3;
+    --code-keyword: #9b859d;
+    --code-operator: #c3c3c3;
+    --code-string: #8f9d6a;
+    --code-comment: #5f5a60;
+    --code-function: #9b859d;
+    --code-boolean: #afc4db;
+    --code-number: #cda869;
+    --code-selector: #cf6a4c;
+    --code-property: #8f9d6a;
+    --code-tag: #cf6a4c;
+    --code-attr: #7587a6;
+    --code-cursor: white;
+  }
+}
+
+// Code colorizaion
+.codeflask {
+  background: var(--input-bg);
+  font-family: 'Overpass Mono', 'Fira Code', 'Monaco', monospace;
+  color: transparent;
+
+  // Antialising
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  // Fixing bold font
+  &__textarea {
+    caret-color: var(--code-cursor) !important;
+    overflow: auto;
+  }
+  &__pre {
+    color: var(--code-variable) !important;
+  }
+
+  .token {
+
+    &.punctuation {
+      color: var(--code-punctuation);
+    }
+
+    &.keyword {
+      color: var(--code-keyword);
+    }
+
+    &.operator {
+      color: var(--code-operator);
+    }
+
+    &.string {
+      color: var(--code-string);
+    }
+
+    &.comment {
+      color: var(--code-comment);
+    }
+
+    &.function {
+      color: var(--code-function);
+    }
+
+    &.boolean {
+      color: var(--code-boolean);
+    }
+
+    &.number {
+      color: var(--code-number);
+    }
+
+    &.selector {
+      color: var(--code-selector);
+    }
+
+    &.property {
+      color: var(--code-property);
+    }
+
+    &.tag {
+      color: var(--code-tag);
+    }
+
+    &.attr-value {
+      color: var(--code-attr);
+    }
+  }
 }

@@ -2,9 +2,19 @@
   <div class="container">
     <div v-if="currentSnippet" class="snippet">
       <SnippetTitle @focusout="onTitleInput" :title="currentSnippet.title" />
-      <SnippetLanguageSelector @change="onLanguageSelect" :language="currentSnippet.language" />
-      <SnippetDescription @focusout="onDescriptionInput" :description="currentSnippet.description" />
-      <SnippetCode @save-code="onCodeInput" :language="currentSnippet.language" :code="currentSnippet.code" />
+      <SnippetLanguageSelector
+        @change="onLanguageSelect"
+        :language="currentSnippet.language"
+      />
+      <SnippetDescription
+        @focusout="onDescriptionInput"
+        :description="currentSnippet.description"
+      />
+      <SnippetCode
+        @save-code="onCodeInput"
+        :language="currentSnippet.language"
+        :code="currentSnippet.code"
+      />
     </div>
     <EmptySnippetView v-else />
   </div>
@@ -18,7 +28,10 @@ import SnippetLanguageSelector from '../components/Snippet/SnippetLanguageSelect
 import SnippetCode from '../components/Snippet/SnippetCode.vue';
 import useSnippetsStore from '../store/snippets.store';
 import usePagerStore from '../store/pager.store';
-import { SnippetLanguage, SnippetsSchema } from '../typescript/types/snippetsStore';
+import {
+  SnippetLanguage,
+  SnippetsSchema,
+} from '../typescript/types/snippetsStore';
 import EmptySnippetView from './EmptySnippetView.vue';
 
 // Stores
@@ -28,14 +41,22 @@ const pagerStore = usePagerStore();
 // Pager ID's
 const currentSnippetID = computed(() => pagerStore.currentSnippet);
 
-const currentSnippet = computed<SnippetsSchema>(() => snippetsStore.snippets
-  .filter(snippet => snippet.id === currentSnippetID.value)[0]
+const currentSnippet = computed<SnippetsSchema>(
+  () =>
+    snippetsStore.snippets.filter(
+      (snippet) => snippet.id === currentSnippetID.value
+    )[0]
 );
 
 function onTitleInput(e: Event) {
   const element = e.target as HTMLInputElement;
   element.value = element.value.trim();
-  currentSnippet.value.title = element.value;
+
+  if (element.value.length === 0) {
+    element.value = currentSnippet.value.title;
+  } else {
+    currentSnippet.value.title = element.value;
+  }
 }
 
 function onLanguageSelect(e: Event) {
@@ -52,7 +73,6 @@ function onCodeInput(code: string) {
   currentSnippet.value.code = code;
 }
 </script>
-
 
 <style scoped lang="less">
 .container {
