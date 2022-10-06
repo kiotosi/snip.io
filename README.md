@@ -24,8 +24,10 @@
 - Autosave of your notes on exit
 - Provides support of many languages (see table in the bottom of the README)
 
-<img width="1112" alt="image" src="https://user-images.githubusercontent.com/101672047/194110309-c36661f0-e6ec-4030-a167-a3f4b0e0acb2.png">
-
+<div style="display: flex;" align="center">
+  <img width="500" alt="Light theme" src="https://user-images.githubusercontent.com/101672047/194110309-c36661f0-e6ec-4030-a167-a3f4b0e0acb2.png">
+  <img width="500" alt="Dark theme" src="https://user-images.githubusercontent.com/101672047/194380558-fba1190d-9a90-470b-bd53-798e0edcfaa5.png">
+</div>
 
 # Why?
 
