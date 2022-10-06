@@ -1,7 +1,8 @@
 <template>
   <select :value="language" class="snippet-language">
-    <option v-for="key in LANGUAGES_SELECTOR_KEYS" :key="key" :value="key">{{LANGUAGES_SELECTOR_LIST[key as keyof typeof
-    LANGUAGES_SELECTOR_LIST]}}</option>
+    <option v-for="key in LANGUAGES_SELECTOR_KEYS" :key="key" :value="key">
+      {{ LANGUAGES_SELECTOR_LIST[key as keyof typeof LANGUAGES_SELECTOR_LIST] }}
+    </option>
   </select>
 </template>
 
@@ -11,8 +12,8 @@ import { SnippetLanguage } from '../../typescript/types/snippetsStore';
 
 const LANGUAGES_SELECTOR_KEYS = Object.keys(LANGUAGES_SELECTOR_LIST);
 defineProps<{
-  language: SnippetLanguage
-}>()
+  language: SnippetLanguage;
+}>();
 </script>
 
 <style lang="less">
@@ -20,8 +21,8 @@ defineProps<{
   appearance: none;
   -webkit-appearance: none;
   width: 300px;
-  background: @white;
-  color: @gray;
+  background: var(--input-bg);
+  color: var(--text);
   padding: 12px 10px;
   position: relative;
   text-overflow: ellipsis;

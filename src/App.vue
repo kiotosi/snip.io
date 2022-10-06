@@ -52,8 +52,8 @@ initializeSaver();
   font-family: 'Inter';
   font-weight: 400;
   font-size: 14px;
-  color: @black;
-  background: @white-bg;
+  color: var(--text);
+  background: var(--background);
   display: flex;
 }
 

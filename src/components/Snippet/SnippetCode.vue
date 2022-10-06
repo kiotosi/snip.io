@@ -13,17 +13,15 @@ const snippetEditor = ref(null) as Ref<null | HTMLElement>;
 let editor: Codeflask;
 
 const props = defineProps<{
-  language: SnippetLanguage,
-  code: string
+  language: SnippetLanguage;
+  code: string;
 }>();
 
-const emit = defineEmits(['saveCode'])
-
+const emit = defineEmits(['saveCode']);
 
 onMounted(() => {
   initializeEditor();
 });
-
 
 onUpdated(() => {
   initializeEditor();
@@ -35,16 +33,18 @@ onUpdated(() => {
  */
 function initializeEditor() {
   editor = new Codeflask(snippetEditor.value as HTMLElement, {
-    language: props.language
+    language: props.language,
   });
-  editor.addLanguage(props.language, Prism.languages[props.language] as Prism.Languages);
+  editor.addLanguage(
+    props.language,
+    Prism.languages[props.language] as Prism.Languages
+  );
   editor.updateCode(props.code);
 }
 
 function onSave() {
   emit('saveCode', editor.getCode());
 }
-
 </script>
 
 <style scoped lang="less">
@@ -55,6 +55,7 @@ function onSave() {
   flex-grow: 1;
   margin-top: 2rem;
   position: relative;
+  background-color: var(--input-bg);
   .default-border();
 }
 </style>

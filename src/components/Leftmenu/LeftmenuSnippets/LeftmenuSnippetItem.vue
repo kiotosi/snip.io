@@ -1,11 +1,19 @@
 <template>
-  <div @click="selectSnippet"  class="leftmenu-snippets-item" :class="{'leftmenu-snippets-item_active': isActive}">
+  <div
+    @click="selectSnippet"
+    class="leftmenu-snippets-item"
+    :class="{ 'leftmenu-snippets-item_active': isActive }"
+  >
     <div class="leftmenu-snippet-item__info">
       <div class="leftmenu-snippets-item__name">
-        {{title}}
+        {{ title }}
       </div>
       <div class="leftmenu-snippets-item__language">
-        {{LANGUAGES_SELECTOR_LIST[language as keyof typeof LANGUAGES_SELECTOR_LIST]}}
+        {{
+          LANGUAGES_SELECTOR_LIST[
+            language as keyof typeof LANGUAGES_SELECTOR_LIST
+          ]
+        }}
       </div>
     </div>
     <div @click="deleteSnippet" class="leftmenu-snippets-item__trash">
@@ -25,10 +33,10 @@ const snippetsStore = useSnippetsStore();
 
 // Props
 interface SnippetsItemProps {
-  language: string
-  title: string
-  isActive?: boolean
-  id: number
+  language: string;
+  title: string;
+  isActive?: boolean;
+  id: number;
 }
 const props = defineProps<SnippetsItemProps>();
 
@@ -47,14 +55,18 @@ function deleteSnippet() {
   }
 
   // Delete index from directory
-  const directoryIndex = snippetsStore.directories.findIndex(folder => folder.id === pagerStore.currentDirectory);
-  snippetsStore.directories[directoryIndex].snippets_list = snippetsStore
-    .directories[directoryIndex]
-    .snippets_list.filter(id => id !== props.id);
+  const directoryIndex = snippetsStore.directories.findIndex(
+    (folder) => folder.id === pagerStore.currentDirectory
+  );
+  snippetsStore.directories[directoryIndex].snippets_list =
+    snippetsStore.directories[directoryIndex].snippets_list.filter(
+      (id) => id !== props.id
+    );
 
-  
   // Delete snippet
-  const index = snippetsStore.snippets.findIndex(snippet => snippet.id === props.id);
+  const index = snippetsStore.snippets.findIndex(
+    (snippet) => snippet.id === props.id
+  );
   snippetsStore.snippets.splice(index, 1);
 }
 </script>
@@ -68,16 +80,16 @@ function deleteSnippet() {
   justify-content: space-between;
   cursor: pointer;
   border-radius: 5px;
-  color: @gray;
+  color: var(--text);
   min-height: 39px;
   .no-selection();
 
   &_active {
-    background-color: @brown-alt;
-    color: @white-bg;
+    background-color: var(--leftmenu-snippet-accent);
+    color: var(--text-highlight);
   }
 
-  &+& {
+  & + & {
     margin-top: 5px;
   }
 
@@ -101,9 +113,8 @@ function deleteSnippet() {
   &__trash {
     display: none;
     &:hover {
-      color: @red-alt;
+      color: var(--trash);
     }
   }
 }
-
 </style>

@@ -21,7 +21,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  color: @gray;
+  color: var(--text);
 
   &__icon {
     font-size: 4rem;

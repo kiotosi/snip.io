@@ -12,7 +12,6 @@ import LeftmenuSnippets from './LeftmenuSnippets/LeftmenuSnippets.vue';
 
 <style scoped lang="less">
 .container {
-  background-color: @gray-bg;
   width: 400px;
   height: 100vh;
   display: flex;
