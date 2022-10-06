@@ -6,11 +6,9 @@
 </template>
 
 <script lang="ts" setup>
-
 // Components
-import LeftmenuMain from "./components/Leftmenu/LeftmenuMain.vue";
-import CurrentSnippetView from "./views/CurrentSnippetView.vue";
-import { appWindow } from "@tauri-apps/api/window";
+import LeftmenuMain from './components/Leftmenu/LeftmenuMain.vue';
+import CurrentSnippetView from './views/CurrentSnippetView.vue';
 
 // Hooks
 import { onBeforeMount } from 'vue';
@@ -20,14 +18,16 @@ import useSnippetsStore from './store/snippets.store';
 import usePagerStore from './store/pager.store';
 
 // System pre-defined functions
-import System from "./typescript/system";
+import System from './typescript/system';
+
+// Saver
+import initializeSaver from './typescript/saver';
 
 // Use stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
 
 onBeforeMount(async () => {
-
   // Get actual information about snippets
   pagerStore.fetchPagerInfo();
 
@@ -43,13 +43,8 @@ onBeforeMount(async () => {
   }
 });
 
-// Save snippets, when user requested exit
-appWindow.onCloseRequested(async () => {
-  await System.snippets.saveSnippetsFile(JSON.stringify({
-    directories: snippetsStore.directories,
-    snippets: snippetsStore.snippets
-  }));
-});
+// Initialize a watch to snippets store (it will save data in snippets.json, when store is mutated)
+initializeSaver();
 </script>
 
 <style lang="less" scoped>
@@ -62,8 +57,9 @@ appWindow.onCloseRequested(async () => {
   display: flex;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-
 </style>
