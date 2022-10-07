@@ -1,1 +1,8 @@
+src/snippet.prism.js
 src/vite-env.d.ts
+src-tauri/
+vite.config.ts
+dist/
+node_modules/
+.eslintrc.cjs
+commitlint.config.js

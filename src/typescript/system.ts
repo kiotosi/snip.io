@@ -1,10 +1,10 @@
 import { INVOKE_METHODS } from '../define';
 import { invoke } from '@tauri-apps/api';
 import { SnippetsStore } from './types/snippetsStore';
-import { TauriEvent, listen } from '@tauri-apps/api/event';
 
 export default {
   snippets: {
+
     /**
      * Load snippets.json
      * @returns JSON from snippets.json

@@ -40,7 +40,7 @@ export const LANGUAGES_SELECTOR_LIST: Partial<Record<SnippetLanguage, string>> =
     yaml: 'YAML',
   };
 
-export const IMMUTABLE_DIRECTORIES_LIST = ['All Snippets'];
+export const IMMUTABLE_DIRECTORIES_LIST = [ 'All Snippets' ];
 
 export const LOCAL_STORAGE_ITEMS = {
   current_directory: 'pager_current_directory',

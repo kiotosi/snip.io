@@ -1,33 +1,39 @@
 <template>
   <!-- Case when there is no directory -->
   <LeftmenuPlaceholder
-    class="leftmenu-placeholder_snippet"
     v-if="directoriesList.length < 1"
+    class="leftmenu-placeholder_snippet"
     icon-name="chevron-double-left"
     text="First of all you need to create a directory 😌"
   />
 
   <!-- Case when there is no snippet in directory -->
   <LeftmenuPlaceholder
-    class="leftmenu-placeholder_snippet"
     v-else-if="snippetsList.length < 1"
+    class="leftmenu-placeholder_snippet"
     :clickable="true"
-    @create="addSnippet"
     icon-name="plus-circle-dotted"
     text="You can create a new snippet via another plus sign 💁‍♂️"
+    @create="addSnippet"
   />
 
   <!-- Other cases (Display snippets list) -->
-  <div v-else class="leftmenu-snippets">
+  <div
+    v-else
+    class="leftmenu-snippets"
+  >
     <LeftmenuSnippetItem
       v-for="snippet in snippetsList"
-      :title="snippet.title"
       :id="snippet.id"
-      :language="snippet.language"
       :key="snippet.id"
+      :title="snippet.title"
+      :language="snippet.language"
       :is-active="snippet.id === currentSnippetID"
     />
-    <LeftmenuAdd @click="addSnippet" class="leftmenu-snippets__adder" />
+    <LeftmenuAdd
+      class="leftmenu-snippets__adder"
+      @click="addSnippet"
+    />
   </div>
 </template>
 
@@ -52,6 +58,7 @@ const directoriesList = computed(() => snippetsStore.directoryList);
 
 // Current snippet list
 const snippetsList = computed<SnippetsSchema[]>(() => {
+
   // Current directory sub-items identificators
   const snippetsListID = snippetsStore.directories
     .filter((folder) => folder.id === currentDirectoryID.value)
@@ -92,6 +99,7 @@ function addSnippet(): void {
 .leftmenu-placeholder_snippet {
   background-color: var(--leftmenu-snippets-bg);
 }
+
 .leftmenu-snippets {
   background-color: var(--leftmenu-snippets-bg);
   height: 100vh;

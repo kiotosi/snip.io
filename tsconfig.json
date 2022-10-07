@@ -19,6 +19,10 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "src/**/*.js"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

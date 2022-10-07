@@ -1,9 +1,6 @@
 // Saves store to file every time, when store states is changed
 import useSnippetsStore from '../store/snippets.store';
 
-// Tauri api to listen when app is quitting
-import { appWindow } from '@tauri-apps/api/window';
-
 // System functions to save and load data from snippets.json
 import System from './system';
 
@@ -19,16 +16,11 @@ async function saveSnippets(snippetsStore: SnippetsStore): Promise<void> {
   );
 }
 
-export default function initializeAutoSave() {
+export default function initializeAutoSave(): void {
   const snippetsStore = useSnippetsStore();
 
   // Save snippets on change
-  snippetsStore.$subscribe(async () => {
-    await saveSnippets(snippetsStore);
-  });
-
-  // Save snippets, when user requested exit
-  appWindow.onCloseRequested(async () => {
-    await saveSnippets(snippetsStore);
+  snippetsStore.$subscribe(() => {
+    saveSnippets(snippetsStore).catch(err => console.error(err));
   });
 }
