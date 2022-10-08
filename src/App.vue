@@ -1,5 +1,8 @@
 <template>
-  <div class="app-wrapper">
+  <div
+    id="app-wrapper-ref"
+    class="app-wrapper"
+  >
     <LeftmenuMain />
     <CurrentSnippetView />
   </div>
