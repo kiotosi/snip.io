@@ -1,10 +1,10 @@
 [package]
 name = "snipio"
-version = "0.0.2"
-description = "A Tauri App"
+version = "0.0.3"
+description = "Snippet manager. Fast, efficient, supercharged."
 authors = ["Daniil Shilo"]
 license = "MIT"
-repository = ""
+repository = "https://github.com/crackidocky/snip.io"
 edition = "2021"
 rust-version = "1.57"
 
