@@ -1,7 +1,14 @@
 <template>
-  <select :value="language" class="snippet-language">
-    <option v-for="key in LANGUAGES_SELECTOR_KEYS" :key="key" :value="key">
-      {{ LANGUAGES_SELECTOR_LIST[key as keyof typeof LANGUAGES_SELECTOR_LIST] }}
+  <select
+    :value="language"
+    class="snippet-language"
+  >
+    <option
+      v-for="key in LANGUAGES_SELECTOR_KEYS"
+      :key="key"
+      :value="key"
+    >
+      {{ getLanguage(key) }}
     </option>
   </select>
 </template>
@@ -14,6 +21,10 @@ const LANGUAGES_SELECTOR_KEYS = Object.keys(LANGUAGES_SELECTOR_LIST);
 defineProps<{
   language: SnippetLanguage;
 }>();
+
+function getLanguage(key: string): string {
+  return LANGUAGES_SELECTOR_LIST[key as keyof typeof LANGUAGES_SELECTOR_LIST] ?? '';
+}
 </script>
 
 <style lang="less">

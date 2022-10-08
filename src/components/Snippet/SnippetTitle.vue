@@ -1,5 +1,6 @@
 <template>
   <input
+    id="snippet-title-ref"
     type="text"
     placeholder="Title of the snippet"
     spellcheck="false"
@@ -7,16 +8,16 @@
     class="snippet-title"
     name="title"
     maxlength="50"
-    id="snippet-title-ref"
-  />
+  >
 </template>
 
 <script lang="ts" setup>
+
 // Props
 defineProps({
   title: {
     type: String,
-    reqiured: true,
+    required: true
   },
 });
 </script>

@@ -1,19 +1,25 @@
 <template>
   <div class="container">
-    <div v-if="currentSnippet" class="snippet">
-      <SnippetTitle @focusout="onTitleInput" :title="currentSnippet.title" />
+    <div
+      v-if="currentSnippet"
+      class="snippet"
+    >
+      <SnippetTitle
+        :title="currentSnippet.title"
+        @focusout="onTitleInput"
+      />
       <SnippetLanguageSelector
-        @change="onLanguageSelect"
         :language="currentSnippet.language"
+        @change="onLanguageSelect"
       />
       <SnippetDescription
-        @focusout="onDescriptionInput"
         :description="currentSnippet.description"
+        @focusout="onDescriptionInput"
       />
       <SnippetCode
-        @save-code="onCodeInput"
         :language="currentSnippet.language"
         :code="currentSnippet.code"
+        @save-code="onCodeInput"
       />
     </div>
     <EmptySnippetView v-else />
@@ -48,7 +54,7 @@ const currentSnippet = computed<SnippetsSchema>(
     )[0]
 );
 
-function onTitleInput(e: Event) {
+function onTitleInput(e: Event): void {
   const element = e.target as HTMLInputElement;
   element.value = element.value.trim();
 
@@ -59,17 +65,17 @@ function onTitleInput(e: Event) {
   }
 }
 
-function onLanguageSelect(e: Event) {
+function onLanguageSelect(e: Event): void {
   const element = e.target as HTMLSelectElement;
   currentSnippet.value.language = element.value as SnippetLanguage;
 }
 
-function onDescriptionInput(e: Event) {
+function onDescriptionInput(e: Event): void {
   const element = e.target as HTMLTextAreaElement;
   currentSnippet.value.description = element.value;
 }
 
-function onCodeInput(code: string) {
+function onCodeInput(code: string): void {
   currentSnippet.value.code = code;
 }
 </script>

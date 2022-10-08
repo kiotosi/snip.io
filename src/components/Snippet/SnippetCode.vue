@@ -1,5 +1,9 @@
 <template>
-  <div @focusout="onSave" class="snippet-code" ref="snippetEditor" />
+  <div
+    ref="snippetEditor"
+    class="snippet-code"
+    @focusout="onSave"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -17,7 +21,7 @@ const props = defineProps<{
   code: string;
 }>();
 
-const emit = defineEmits(['saveCode']);
+const emit = defineEmits([ 'saveCode' ]);
 
 onMounted(() => {
   initializeEditor();
@@ -29,9 +33,8 @@ onUpdated(() => {
 
 /**
  * Creates new editor with new language
- * @param editor Codeflask editor instance
  */
-function initializeEditor() {
+function initializeEditor(): void {
   editor = new Codeflask(snippetEditor.value as HTMLElement, {
     language: props.language,
     defaultTheme: false,
@@ -43,7 +46,7 @@ function initializeEditor() {
   editor.updateCode(props.code);
 }
 
-function onSave() {
+function onSave(): void {
   emit('saveCode', editor.getCode());
 }
 </script>

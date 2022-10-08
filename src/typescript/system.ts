@@ -15,7 +15,7 @@ export default {
 
     /**
      * Saves snippets to snippets.json
-     * @param snippetsObject Snippets object from store
+     * @param snippetsObject - Snippets object from store
      */
     async saveSnippetsFile(json: string): Promise<void> {
       await invoke(INVOKE_METHODS.snippets.save, {

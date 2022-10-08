@@ -18,7 +18,7 @@ export default defineStore('snippets', {
 
     /**
      * Count snippets in folder
-     * @param id ID of folder
+     * @param id - ID of folder
      * @returns Amount of snippets in folder
      */
     countSnippets(id: number): number {

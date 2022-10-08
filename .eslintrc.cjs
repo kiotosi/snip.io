@@ -134,10 +134,12 @@ module.exports = {
   parserOptions: {
     parser: {
       '<template>': 'espree',
-      js: 'espree',
       ts: '@typescript-eslint/parser',
     },
     ecmaVersion: 'latest',
+    ecmaFeatures: {
+      jsx: true
+    },
     sourceType: 'module',
     tsconfigRootDir: __dirname,
     project: ['tsconfig.json'],

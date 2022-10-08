@@ -1,11 +1,11 @@
 <template>
   <div
-    @click="$emit('create')"
     class="leftmenu-placeholder"
     :class="{ 'leftmenu-placeholder_clickable': clickable }"
+    @click="$emit('create')"
   >
     <div class="leftmenu-placeholder__icon">
-      <i :class="'bi bi-' + iconName"></i>
+      <i :class="'bi bi-' + iconName" />
     </div>
     <div class="leftmenu-placeholder__description">
       {{ text }}
@@ -20,7 +20,7 @@ interface LeftmenuPlaceholderProps {
   clickable?: boolean;
 }
 defineProps<LeftmenuPlaceholderProps>();
-defineEmits(['create']);
+defineEmits([ 'create' ]);
 </script>
 
 <style scoped lang="less">

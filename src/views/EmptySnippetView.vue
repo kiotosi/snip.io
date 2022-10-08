@@ -1,8 +1,10 @@
 <template>
   <div class="empty-screen">
-    <i class="empty-screen__icon bi bi-journals"></i>
+    <i class="empty-screen__icon bi bi-journals" />
     <div class="empty-screen__description">
-      <p class="empty-screen__text">There is no selected snippets.</p>
+      <p class="empty-screen__text">
+        There is no selected snippets.
+      </p>
       <p class="empty-screen__text">
         Please use sidebar to select snippet or create a new one.
       </p>
