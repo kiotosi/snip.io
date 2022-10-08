@@ -1,30 +1,32 @@
 <template>
-  <div
-    class="modal-wrapper"
-  >
-    <div class="modal-window">
-      <div class="modal-window__body">
-        {{ text }}
-      </div>
-      <div class="modal-window__options">
-        <div
-          class="modal-window__buttons modal-button modal-button_accept"
-          @click="() => {
-            $emit('action');
-            $emit('close');
-          }"
-        >
-          <i :class="'bi bi-' + icon" />
+  <Transition name="modal-fade">
+    <div
+      class="modal-wrapper"
+    >
+      <div class="modal-window">
+        <div class="modal-window__body">
+          {{ text }}
         </div>
-        <div
-          class="modal-window__buttons modal-button modal-button_reject"
-          @click="$emit('close')"
-        >
-          <i class="bi bi-arrow-counterclockwise" />
+        <div class="modal-window__options">
+          <div
+            class="modal-window__buttons modal-button modal-button_accept"
+            @click="() => {
+              $emit('action');
+              $emit('close');
+            }"
+          >
+            <i :class="'bi bi-' + icon" />
+          </div>
+          <div
+            class="modal-window__buttons modal-button modal-button_reject"
+            @click="$emit('close')"
+          >
+            <i class="bi bi-arrow-counterclockwise" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -127,6 +129,6 @@ defineEmits([ 'action', 'close' ]);
 
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity .2s ease;
 }
 </style>
