@@ -4,6 +4,7 @@
 )]
 
 mod config;
+mod menu;
 use config::snippets::Snippets;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -35,6 +36,7 @@ fn save_snippets(json: &str) {
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![get_snippets, save_snippets])
+        .menu(menu::generate_menu())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
