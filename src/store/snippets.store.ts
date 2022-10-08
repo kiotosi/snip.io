@@ -10,13 +10,15 @@ export default defineStore('snippets', {
     ({
       directories: [],
       snippets: [],
+
       // IMPL Maybe we can implement here `currentSnippet`, for changing it not through computed proprty in CurrentSnippet.vue
     } as SnippetsStore),
 
   actions: {
+
     /**
      * Count snippets in folder
-     * @param id ID of folder
+     * @param id - ID of folder
      * @returns Amount of snippets in folder
      */
     countSnippets(id: number): number {
@@ -31,6 +33,7 @@ export default defineStore('snippets', {
   },
 
   getters: {
+
     /**
      * Retrieve folders for leftmenu
      * @returns All folder names

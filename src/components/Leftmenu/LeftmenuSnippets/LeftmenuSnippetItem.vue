@@ -1,8 +1,8 @@
 <template>
   <div
-    @click="selectSnippet"
     class="leftmenu-snippets-item"
     :class="{ 'leftmenu-snippets-item_active': isActive }"
+    @click="selectSnippet"
   >
     <div class="leftmenu-snippet-item__info">
       <div class="leftmenu-snippets-item__name">
@@ -11,21 +11,34 @@
       <div class="leftmenu-snippets-item__language">
         {{
           LANGUAGES_SELECTOR_LIST[
-            language as keyof typeof LANGUAGES_SELECTOR_LIST
+            language
           ]
         }}
       </div>
     </div>
-    <div @click="deleteSnippet" class="leftmenu-snippets-item__trash">
-      <i class="bi bi-trash"></i>
+    <div
+      class="leftmenu-snippets-item__trash"
+      @click="(e) => { isModalShowed = true }"
+    >
+      <i class="bi bi-trash" />
     </div>
   </div>
+
+  <ModalDialog
+    v-show="isModalShowed"
+    :text="MODAL_WARNING"
+    icon="file-x-fill"
+    @action="deleteSnippet"
+    @close="() => isModalShowed = false"
+  />
 </template>
 
 <script setup lang="ts">
 import { LANGUAGES_SELECTOR_LIST } from '../../../define';
 import usePagerStore from '../../../store/pager.store';
 import useSnippetsStore from '../../../store/snippets.store';
+import { ref } from 'vue';
+import ModalDialog from '../../ModalWindow/ModalDialog.vue';
 
 // Store
 const pagerStore = usePagerStore();
@@ -33,23 +46,28 @@ const snippetsStore = useSnippetsStore();
 
 // Props
 interface SnippetsItemProps {
-  language: string;
+  language: keyof typeof LANGUAGES_SELECTOR_LIST;
   title: string;
   isActive?: boolean;
   id: number;
 }
 const props = defineProps<SnippetsItemProps>();
 
+// References
+const isModalShowed = ref(false);
+
+// Modal window
+const MODAL_WARNING = 'Do you really want to remove this snippet? After deletion, this snippet can no longer be restored';
+
 /**
  * Select the snippet
- * @param id ID of current snippet
  */
-function selectSnippet() {
+function selectSnippet(): void {
   pagerStore.currentSnippet = props.id;
   pagerStore.savePagerInfo();
 }
 
-function deleteSnippet() {
+function deleteSnippet(): void {
   if (pagerStore.currentSnippet === props.id) {
     pagerStore.currentSnippet = -1;
   }

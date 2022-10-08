@@ -1,6 +1,6 @@
 <template>
   <div class="leftmenu-folder-add">
-    <i class="bi bi-plus-lg leftmenu-folder-add__icon"></i>
+    <i class="bi bi-plus-lg leftmenu-folder-add__icon" />
   </div>
 </template>
 

@@ -10,6 +10,7 @@ export default defineStore('pager', {
     } as PagerStore),
 
   actions: {
+
     /**
      * Collect data about pager state in Local Storage
      */

@@ -5,27 +5,34 @@
     :class="{ 'leftmenu-folder-item_active': isActive }"
   >
     <input
-      :value="capitalize(name)"
       ref="directoryNameInput"
+      class="leftmenu-folder-item__edit"
+      :value="capitalize(name)"
       spellcheck="false"
       contenteditable="true"
       @keydown="checkRename"
       @focusout="endRename"
-      class="leftmenu-folder-item__edit"
-    />
+    >
   </div>
 
   <div
     v-else
-    @dblclick="startRename"
-    @click="selectFolder"
     class="leftmenu-folder-item leftmenu-folder-item_display"
     :class="{ 'leftmenu-folder-item_active': isActive }"
+    @dblclick="startRename"
+    @click="selectFolder"
   >
-    <div class="leftmenu-folder-item__name">{{ capitalize($props.name) }}</div>
+    <div class="leftmenu-folder-item__name">
+      {{ capitalize($props.name) }}
+    </div>
+
     <div class="leftmenu-folder-item__info">
-      <div @click="deleteFolder" class="leftmenu-folder-item__trash">
-        <i class="bi bi-trash"></i>
+      <div
+        v-if="directoriesCount > 1"
+        class="leftmenu-folder-item__trash"
+        @click="$emit('delete')"
+      >
+        <i class="bi bi-trash" />
       </div>
       <div class="leftmenu-folder-item__amount">
         {{ $props.snippetsAmount }}
@@ -35,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { capitalize, nextTick, ref } from 'vue';
+import { capitalize, computed, nextTick, ref } from 'vue';
 import usePagerStore from '../../../store/pager.store';
 import useSnippetsStore from '../../../store/snippets.store';
 
@@ -56,43 +63,20 @@ interface FolderItemProps {
 }
 const props = defineProps<FolderItemProps>();
 
-function startRename() {
+// DIrectories count
+const directoriesCount = computed(() => snippetsStore.directories.length);
+
+// Emits
+defineEmits([ 'delete' ]);
+
+async function startRename(): Promise<void> {
   isEditing.value = true;
-  nextTick(() => {
+  await nextTick(() => {
     directoryNameInput.value?.focus();
   });
 }
 
-function deleteFolder() {
-  if (snippetsStore.directories.length === 1) {
-    return;
-  }
-
-  // Getting folder index in store
-  const currentFolderID = snippetsStore.directories.findIndex(
-    (folder) => folder.id === props.id
-  );
-
-  // Deleting all child snippets
-  if (currentFolderID !== -1) {
-    snippetsStore.snippets = snippetsStore.snippets.filter(
-      (snippet) =>
-        !snippetsStore.directories[currentFolderID].snippets_list.includes(
-          snippet.id
-        )
-    );
-  }
-
-  // Deleting folder
-  snippetsStore.directories.splice(currentFolderID, 1);
-
-  if (props.id === pagerStore.currentDirectory) {
-    pagerStore.currentDirectory = -1;
-    pagerStore.currentSnippet = -1;
-  }
-}
-
-function endRename() {
+function endRename(): void {
   isEditing.value = false;
   const directory = snippetsStore.directories.find(
     (folder) => folder.id === props.id
@@ -104,7 +88,7 @@ function endRename() {
   }
 }
 
-function checkRename(e: KeyboardEvent) {
+function checkRename(e: KeyboardEvent): void {
   if (e.key === 'Enter') {
     e.preventDefault();
     endRename();
@@ -113,7 +97,6 @@ function checkRename(e: KeyboardEvent) {
 
 /**
  * Select directory
- * @param id ID of current directory
  */
 function selectFolder(): void {
   pagerStore.currentDirectory = props.id;

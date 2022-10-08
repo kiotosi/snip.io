@@ -1,11 +1,15 @@
 <template>
-  <div class="app-wrapper">
+  <div
+    id="app-wrapper-ref"
+    class="app-wrapper"
+  >
     <LeftmenuMain />
     <CurrentSnippetView />
   </div>
 </template>
 
 <script lang="ts" setup>
+
 // Components
 import LeftmenuMain from './components/Leftmenu/LeftmenuMain.vue';
 import CurrentSnippetView from './views/CurrentSnippetView.vue';
@@ -28,10 +32,12 @@ const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
 
 onBeforeMount(async () => {
+
   // Get actual information about snippets
   pagerStore.fetchPagerInfo();
 
   try {
+
     // Get snippets.json
     const snippetsJSON = await System.snippets.loadSnippetsFile();
 

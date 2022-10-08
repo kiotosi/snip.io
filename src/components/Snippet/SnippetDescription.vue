@@ -4,7 +4,7 @@
     placeholder="Type description to your snippet"
     name="description"
     class="snippet-description"
-  ></textarea>
+  />
 </template>
 
 <script lang="ts" setup>
