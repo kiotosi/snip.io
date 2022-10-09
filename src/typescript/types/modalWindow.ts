@@ -3,3 +3,10 @@ export enum ModalWindowSize {
   'medium',
   'large'
 }
+
+export enum SearchType {
+  'folder',
+  'snippets',
+  'commands',
+  'all'
+}

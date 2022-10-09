@@ -60,35 +60,35 @@ const directoriesList = computed(() => snippetsStore.directoryList);
 const snippetsList = computed<SnippetsSchema[]>(() => {
 
   // Current directory sub-items identificators
-  const snippetsListID = snippetsStore.directories
+  const snippetsIdList = snippetsStore.directoriesList
     .filter((folder) => folder.id === currentDirectoryID.value)
-    .at(0)?.snippets_list;
+    .at(0)?.snippetsList;
 
-  if (!snippetsListID) {
+  if (!snippetsIdList) {
     return [];
   }
-  return snippetsStore.snippets.filter((snippet) =>
-    snippetsListID.includes(snippet.id)
+  return snippetsStore.snippetsList.filter((snippet) =>
+    snippetsIdList.includes(snippet.id)
   );
 });
 
 function addSnippet(): void {
-  if (snippetsStore.directories.length === 0) {
+  if (snippetsStore.directoriesList.length === 0) {
     return;
   }
   const newID = snippetsStore.lastSnippetID + 1;
   const snippetMockup = createSnippetMock(newID);
 
   // Push new snippet
-  snippetsStore.snippets.push(snippetMockup);
+  snippetsStore.snippetsList.push(snippetMockup);
 
   // Push new ID to current directoty
-  const currentDirectory = snippetsStore.directories
+  const currentDirectory = snippetsStore.directoriesList
     .filter((folder) => folder.id === currentDirectoryID.value)
     .at(0);
 
   if (currentDirectory) {
-    currentDirectory.snippets_list.push(newID);
+    currentDirectory.snippetsList.push(newID);
     pagerStore.currentSnippet = newID;
     pagerStore.savePagerInfo();
   }

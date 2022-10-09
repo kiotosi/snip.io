@@ -4,7 +4,7 @@
     class="snippet-language"
   >
     <option
-      v-for="key in LANGUAGES_SELECTOR_KEYS"
+      v-for="key in languagesSelectorKeyList"
       :key="key"
       :value="key"
     >
@@ -17,7 +17,7 @@
 import { LANGUAGES_SELECTOR_LIST } from '../../define';
 import { SnippetLanguage } from '../../typescript/types/snippetsStore';
 
-const LANGUAGES_SELECTOR_KEYS = Object.keys(LANGUAGES_SELECTOR_LIST);
+const languagesSelectorKeyList = Object.keys(LANGUAGES_SELECTOR_LIST);
 defineProps<{
   language: SnippetLanguage;
 }>();

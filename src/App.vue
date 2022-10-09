@@ -5,6 +5,7 @@
   >
     <LeftmenuMain />
     <CurrentSnippetView />
+    <ModalSearch :type="searchType" />
   </div>
 </template>
 
@@ -15,7 +16,7 @@ import LeftmenuMain from './components/Leftmenu/LeftmenuMain.vue';
 import CurrentSnippetView from './views/CurrentSnippetView.vue';
 
 // Hooks
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 
 // Store
 import useSnippetsStore from './store/snippets.store';
@@ -26,10 +27,15 @@ import System from './typescript/system';
 
 // Saver
 import initializeSaver from './typescript/saver';
+import ModalSearch from './components/ModalWindow/ModalSearch/ModalSearch.vue';
+import { SearchType } from './typescript/types/modalWindow';
 
 // Use stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
+
+// Search type
+const searchType = ref<SearchType>(SearchType.folder);
 
 onBeforeMount(async () => {
 
@@ -42,8 +48,8 @@ onBeforeMount(async () => {
     const snippetsJSON = await System.snippets.loadSnippetsFile();
 
     // Save it into global store (pinia)
-    snippetsStore.snippets = snippetsJSON.snippets;
-    snippetsStore.directories = snippetsJSON.directories;
+    snippetsStore.snippetsList = snippetsJSON.snippetsList;
+    snippetsStore.directoriesList = snippetsJSON.directoriesList;
   } catch (e) {
     console.error('Failed to parse snippets.json', e);
   }

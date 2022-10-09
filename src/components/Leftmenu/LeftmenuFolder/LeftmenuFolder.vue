@@ -63,32 +63,32 @@ const currentDeletingFolder = ref(0);
 function addFolder(): void {
   const newID = snippetsStore.lastDirectoryID + 1;
   const directoryMock = createDirectoryMock(newID);
-  snippetsStore.directories.push(directoryMock);
+  snippetsStore.directoriesList.push(directoryMock);
   pagerStore.currentDirectory = newID;
 }
 
 function deleteFolder(): void {
-  if (snippetsStore.directories.length === 1) {
+  if (snippetsStore.directoriesList.length === 1) {
     return;
   }
 
   // Getting folder index in store
-  const currentFolderID = snippetsStore.directories.findIndex(
+  const currentFolderID = snippetsStore.directoriesList.findIndex(
     (folder) => folder.id === currentDeletingFolder.value
   );
 
   // Deleting all child snippets
   if (currentFolderID !== -1) {
-    snippetsStore.snippets = snippetsStore.snippets.filter(
+    snippetsStore.snippetsList = snippetsStore.snippetsList.filter(
       (snippet) =>
-        !snippetsStore.directories[currentFolderID].snippets_list.includes(
+        !snippetsStore.directoriesList[currentFolderID].snippetsList.includes(
           snippet.id
         )
     );
   }
 
   // Deleting folder
-  snippetsStore.directories.splice(currentFolderID, 1);
+  snippetsStore.directoriesList.splice(currentFolderID, 1);
 
   if (currentDeletingFolder.value === pagerStore.currentDirectory) {
     pagerStore.currentDirectory = -1;

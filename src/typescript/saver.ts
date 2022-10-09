@@ -9,9 +9,10 @@ import { SnippetsStore } from './types/snippetsStore';
 
 async function saveSnippets(snippetsStore: SnippetsStore): Promise<void> {
   await System.snippets.saveSnippetsFile(
+
     JSON.stringify({
-      directories: snippetsStore.directories,
-      snippets: snippetsStore.snippets,
+      directories: snippetsStore.directoriesList, // eslint-disable-line @typescript-eslint/naming-convention
+      snippets: snippetsStore.snippetsList, // eslint-disable-line @typescript-eslint/naming-convention
     })
   );
 }
