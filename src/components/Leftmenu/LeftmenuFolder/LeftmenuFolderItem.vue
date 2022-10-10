@@ -64,7 +64,7 @@ interface FolderItemProps {
 const props = defineProps<FolderItemProps>();
 
 // DIrectories count
-const directoriesCount = computed(() => snippetsStore.directories.length);
+const directoriesCount = computed(() => snippetsStore.directoriesList.length);
 
 // Emits
 defineEmits([ 'delete' ]);
@@ -78,7 +78,7 @@ async function startRename(): Promise<void> {
 
 function endRename(): void {
   isEditing.value = false;
-  const directory = snippetsStore.directories.find(
+  const directory = snippetsStore.directoriesList.find(
     (folder) => folder.id === props.id
   );
 

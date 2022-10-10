@@ -73,19 +73,19 @@ function deleteSnippet(): void {
   }
 
   // Delete index from directory
-  const directoryIndex = snippetsStore.directories.findIndex(
+  const directoryIndex = snippetsStore.directoriesList.findIndex(
     (folder) => folder.id === pagerStore.currentDirectory
   );
-  snippetsStore.directories[directoryIndex].snippets_list =
-    snippetsStore.directories[directoryIndex].snippets_list.filter(
+  snippetsStore.directoriesList[directoryIndex].snippetsList =
+    snippetsStore.directoriesList[directoryIndex].snippetsList.filter(
       (id) => id !== props.id
     );
 
   // Delete snippet
-  const index = snippetsStore.snippets.findIndex(
+  const index = snippetsStore.snippetsList.findIndex(
     (snippet) => snippet.id === props.id
   );
-  snippetsStore.snippets.splice(index, 1);
+  snippetsStore.snippetsList.splice(index, 1);
 }
 </script>
 
@@ -107,7 +107,7 @@ function deleteSnippet(): void {
     color: var(--text-highlight);
   }
 
-  & + & {
+  &:not(:first-child) {
     margin-top: 5px;
   }
 

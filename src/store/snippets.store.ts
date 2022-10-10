@@ -8,10 +8,8 @@ import {
 export default defineStore('snippets', {
   state: () =>
     ({
-      directories: [],
-      snippets: [],
-
-      // IMPL Maybe we can implement here `currentSnippet`, for changing it not through computed proprty in CurrentSnippet.vue
+      directoriesList: [],
+      snippetsList: [],
     } as SnippetsStore),
 
   actions: {
@@ -22,9 +20,9 @@ export default defineStore('snippets', {
      * @returns Amount of snippets in folder
      */
     countSnippets(id: number): number {
-      for (const folder of this.directories) {
+      for (const folder of this.directoriesList) {
         if (folder.id === id) {
-          return folder.snippets_list.length;
+          return folder.snippetsList.length;
         }
       }
 
@@ -39,10 +37,10 @@ export default defineStore('snippets', {
      * @returns All folder names
      */
     directoryList(state): LeftmenuFolderList {
-      return state.directories.map((folder) => ({
+      return state.directoriesList.map((folder) => ({
         name: folder.name,
         id: folder.id,
-        snippetsAmount: folder.snippets_list.length,
+        snippetsAmount: folder.snippetsList.length,
       }));
     },
 
@@ -51,7 +49,7 @@ export default defineStore('snippets', {
      * @returns All snippets in all folder
      */
     allSnippetsList(state): SnippetsSchema[] {
-      return state.snippets;
+      return state.snippetsList;
     },
 
     /**
@@ -59,15 +57,15 @@ export default defineStore('snippets', {
      * @returns Last snippets id
      */
     lastSnippetID(state): number {
-      const ids = state.snippets
+      const idList = state.snippetsList
         .filter((snippet) => snippet.id >= 0)
         .map((snippet) => snippet.id);
 
-      if (ids.length === 0) {
+      if (idList.length === 0) {
         return -1;
       }
 
-      return Math.max(...ids);
+      return Math.max(...idList);
     },
 
     /**
@@ -75,23 +73,13 @@ export default defineStore('snippets', {
      * @returns Last directory id
      */
     lastDirectoryID(state): number {
-      const ids = state.directories.map((folder) => folder.id);
+      const idList = state.directoriesList.map((folder) => folder.id);
 
-      if (ids.length === 0) {
+      if (idList.length === 0) {
         return -1;
       }
 
-      return Math.max(...ids);
+      return Math.max(...idList);
     },
   },
 });
-
-///
-
-// Достать сниппет
-// Добавить сниппет
-// Удалить сниппет
-// Изменить сниппет
-// Удалить директорию
-// Добавить директорию
-// Изменить имя директории

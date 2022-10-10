@@ -5,6 +5,10 @@
   >
     <LeftmenuMain />
     <CurrentSnippetView />
+    <ModalSearch
+      v-if="isSearchActive"
+      @close="closeSearchModal"
+    />
   </div>
 </template>
 
@@ -15,7 +19,7 @@ import LeftmenuMain from './components/Leftmenu/LeftmenuMain.vue';
 import CurrentSnippetView from './views/CurrentSnippetView.vue';
 
 // Hooks
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 
 // Store
 import useSnippetsStore from './store/snippets.store';
@@ -26,10 +30,14 @@ import System from './typescript/system';
 
 // Saver
 import initializeSaver from './typescript/saver';
+import ModalSearch from './components/ModalWindow/ModalSearch/ModalSearch.vue';
 
 // Use stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
+
+// Modal search
+const isSearchActive = ref(false);
 
 onBeforeMount(async () => {
 
@@ -42,12 +50,24 @@ onBeforeMount(async () => {
     const snippetsJSON = await System.snippets.loadSnippetsFile();
 
     // Save it into global store (pinia)
-    snippetsStore.snippets = snippetsJSON.snippets;
-    snippetsStore.directories = snippetsJSON.directories;
+    snippetsStore.snippetsList = snippetsJSON.snippetsList;
+    snippetsStore.directoriesList = snippetsJSON.directoriesList;
   } catch (e) {
     console.error('Failed to parse snippets.json', e);
   }
+
+  addEventListener('keydown', (e) => {
+    
+    // Show search modal
+    if (!isSearchActive.value && e.key === 'p' && e.shiftKey === true && (e.metaKey === true || e.ctrlKey === true)) {
+      isSearchActive.value = true;
+    }
+  });
 });
+
+function closeSearchModal(): void {
+  isSearchActive.value = false;
+}
 
 // Initialize a watch to snippets store (it will save data in snippets.json, when store is mutated)
 initializeSaver();

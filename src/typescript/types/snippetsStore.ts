@@ -16,13 +16,13 @@ export interface SnippetsSchema {
 export interface DirectorySchema {
   name: string;
   id: number;
-  snippets_list: number[];
+  snippetsList: number[];
 }
 
 // Pinia store
 export interface SnippetsStore {
-  directories: DirectorySchema[];
-  snippets: SnippetsSchema[];
+  directoriesList: DirectorySchema[];
+  snippetsList: SnippetsSchema[];
 }
 
 // -- Leftmenu -- //

@@ -93,6 +93,17 @@ const namingConventions = {
       },
     },
 
+    // All arrays ends with list
+    {
+      selector: ['variable', 'parameter', 'objectLiteralProperty'],
+      types: ["array"],
+      format: ['camelCase', 'UPPER_CASE'],
+      filter: {
+        regex: "/.*list$/i",
+        match: true,
+      }
+    },
+
     // All functions and variables are camelCase
     {
       selector: ['function', 'parameter'],

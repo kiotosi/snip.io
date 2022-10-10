@@ -49,7 +49,7 @@ const currentSnippetID = computed(() => pagerStore.currentSnippet);
 
 const currentSnippet = computed<SnippetsSchema>(
   () =>
-    snippetsStore.snippets.filter(
+    snippetsStore.snippetsList.filter(
       (snippet) => snippet.id === currentSnippetID.value
     )[0]
 );

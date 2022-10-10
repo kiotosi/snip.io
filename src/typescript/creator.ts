@@ -13,6 +13,6 @@ export function createDirectoryMock(id: number): DirectorySchema {
   return {
     id,
     name: 'New directory',
-    snippets_list: [],
+    snippetsList: [],
   };
 }
