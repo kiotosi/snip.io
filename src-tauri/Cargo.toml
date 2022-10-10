@@ -1,6 +1,6 @@
 [package]
 name = "snipio"
-version = "0.0.3"
+version = "0.0.4"
 description = "Snippet manager. Fast, efficient, supercharged."
 authors = ["Daniil Shilo"]
 license = "MIT"
