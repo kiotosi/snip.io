@@ -11,8 +11,8 @@ async function saveSnippets(snippetsStore: SnippetsStore): Promise<void> {
   await System.snippets.saveSnippetsFile(
 
     JSON.stringify({
-      directories: snippetsStore.directoriesList, // eslint-disable-line @typescript-eslint/naming-convention
-      snippets: snippetsStore.snippetsList, // eslint-disable-line @typescript-eslint/naming-convention
+      directoriesList: snippetsStore.directoriesList,
+      snippetsList: snippetsStore.snippetsList,
     })
   );
 }

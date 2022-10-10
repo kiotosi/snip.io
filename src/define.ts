@@ -1,4 +1,5 @@
 import { SnippetLanguage } from './typescript/types/snippetsStore';
+import { appWindow } from '@tauri-apps/api/window'
 
 export const LANGUAGES_SELECTOR_LIST: Partial<Record<SnippetLanguage, string>> =
   {
@@ -53,3 +54,22 @@ export const INVOKE_METHODS = {
     load: 'get_snippets',
   },
 };
+
+export const WINDOW_COMMANDS = [
+  {
+    name: "Hide Window",
+    command: (): Promise<void> => appWindow.minimize(),
+  },
+  {
+    name: "Close App",
+    command: (): Promise<void> => appWindow.close(),
+  },
+  {
+    name: "Toggle Fullscreen",
+    command: (): Promise<void> => appWindow.isFullscreen().then(async isFullscreen => {await appWindow.setFullscreen(!isFullscreen);}),
+  },
+  {
+    name: "Maximize or minimize",
+    command: (): Promise<void> => appWindow.toggleMaximize()
+  }
+];

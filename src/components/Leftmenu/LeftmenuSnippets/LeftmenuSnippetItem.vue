@@ -107,7 +107,7 @@ function deleteSnippet(): void {
     color: var(--text-highlight);
   }
 
-  & + & {
+  &:not(:first-child) {
     margin-top: 5px;
   }
 

@@ -5,7 +5,10 @@
   >
     <LeftmenuMain />
     <CurrentSnippetView />
-    <ModalSearch :type="searchType" />
+    <ModalSearch
+      v-if="isSearchActive"
+      @close="closeSearchModal"
+    />
   </div>
 </template>
 
@@ -28,14 +31,13 @@ import System from './typescript/system';
 // Saver
 import initializeSaver from './typescript/saver';
 import ModalSearch from './components/ModalWindow/ModalSearch/ModalSearch.vue';
-import { SearchType } from './typescript/types/modalWindow';
 
 // Use stores
 const snippetsStore = useSnippetsStore();
 const pagerStore = usePagerStore();
 
-// Search type
-const searchType = ref<SearchType>(SearchType.folder);
+// Modal search
+const isSearchActive = ref(false);
 
 onBeforeMount(async () => {
 
@@ -53,7 +55,19 @@ onBeforeMount(async () => {
   } catch (e) {
     console.error('Failed to parse snippets.json', e);
   }
+
+  addEventListener('keydown', (e) => {
+    
+    // Show search modal
+    if (!isSearchActive.value && e.key === 'p' && e.shiftKey === true && (e.metaKey === true || e.ctrlKey === true)) {
+      isSearchActive.value = true;
+    }
+  });
 });
+
+function closeSearchModal(): void {
+  isSearchActive.value = false;
+}
 
 // Initialize a watch to snippets store (it will save data in snippets.json, when store is mutated)
 initializeSaver();

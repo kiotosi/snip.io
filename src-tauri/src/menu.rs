@@ -1,26 +1,38 @@
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
 pub fn generate_menu() -> Menu {
+  let about_menu = Submenu::new("App", Menu::new()
+    .add_native_item(MenuItem::Hide)
+    .add_native_item(MenuItem::HideOthers)
+    .add_native_item(MenuItem::ShowAll)
+    .add_native_item(MenuItem::Separator)
+    .add_native_item(MenuItem::Quit));
 
-  // here `"quit".to_string()` defines the menu item id, and the second parameter is the menu item label.
-  let quit = CustomMenuItem::new("quit", "Quit");
-  let window_submenu = Submenu::new("Window", Menu::new().add_item(quit));
+  let edit_menu = Submenu::new("Edit", Menu::new()
+    .add_native_item(MenuItem::Undo)
+    .add_native_item(MenuItem::Redo)
+    .add_native_item(MenuItem::Separator)
+    .add_native_item(MenuItem::Cut)
+    .add_native_item(MenuItem::Copy)
+    .add_native_item(MenuItem::Paste)
+    .add_native_item(MenuItem::SelectAll));
 
-  let snippets_search = CustomMenuItem::new("search_snippets", "Search for snippets");
-  let folder_search = CustomMenuItem::new("search_folders", "Search for directory");
-  let search_submenu = Submenu::new("Search",
-  Menu::new()
-    .add_item(snippets_search)
-    .add_item(folder_search)
-  );
+  let view_menu = Submenu::new("View", Menu::new()
+    .add_native_item(MenuItem::EnterFullScreen));
 
-  let about = CustomMenuItem::new("about", "About");
+  let window_menu = Submenu::new("Window", Menu::new()
+    .add_native_item(MenuItem::Minimize)
+    .add_native_item(MenuItem::Zoom));
+
+  let help_menu = Submenu::new("Help", Menu::new()
+    .add_item(CustomMenuItem::new("Learn More", "Learn More")));
 
   let menu = Menu::new()
-    .add_native_item(MenuItem::Copy)
-    .add_submenu(search_submenu)
-    .add_submenu(window_submenu)
-    .add_item(about);
+    .add_submenu(about_menu)
+    .add_submenu(edit_menu)
+    .add_submenu(view_menu)
+    .add_submenu(window_menu)
+    .add_submenu(help_menu);
 
-  return menu;
+  menu
 }
